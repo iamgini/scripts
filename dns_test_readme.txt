@@ -5,4 +5,4 @@ DNS Test - ver 1.3.0.
 
 Note : add your node names or IP address in a file named "ping.txt" in same directory and run the script.
 
-Any bugs ? Contact gineesh.mada-pparambath@t-systems.com
+Any bugs ? Contact net.gini@gmail.com
