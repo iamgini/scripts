@@ -2,6 +2,7 @@
 #20180205: version 1.1.0 - Updated details
 #Contact : gineesh.mada-pparambath@t-systems.com
 
+
 if [ -z "$1" ]; then
   echo "Enclosure Name is required"
   exit 1
