@@ -1,7 +1,6 @@
 #!/bin/bash
 #20180205: version 1.1.0 - Updated details
-#Contact : gineesh.mada-pparambath@t-systems.com
-
+#Contact : net.gini@gmail.com
 
 if [ -z "$1" ]; then
   echo "Enclosure Name is required"
