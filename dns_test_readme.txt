@@ -9,4 +9,3 @@ Any bugs ? Contact net.gini@gmail.com
 Thank you
 
 www.techbeatly.com
-www.rovervibes.com
