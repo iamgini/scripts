@@ -7,3 +7,5 @@ Note : add your node names or IP address in a file named "ping.txt" in same dire
 
 Any bugs ? Contact net.gini@gmail.com
 Thank you
+
+www.techbeatly.com
