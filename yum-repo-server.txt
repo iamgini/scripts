@@ -86,3 +86,66 @@ done
 
 - set permission for this
 # chmod 755 /etc/cron.daily/update-localrepos
+
+on local\client machine
+===================
+vim /etc/yum.repos.d/local-repos.repo
+
+- add below
+
+[local-base]
+name=CentOS Base
+baseurl=http://104.196.188.53/base/
+gpgcheck=0
+enabled=1
+
+[local-centosplus]
+name=CentOS CentOSPlus
+baseurl=http://104.196.188.53/centosplus/
+gpgcheck=0
+enabled=1
+
+[local-extras]
+name=CentOS Extras
+baseurl=http://104.196.188.53/extras/
+gpgcheck=0
+enabled=1
+
+[local-updates]
+name=CentOS Updates
+baseurl=http://104.196.188.53/updates/
+gpgcheck=0
+enabled=1
+
+
+========troubleshooting =================
+- forbiddern error on client
+
+http://104.196.188.53/base/repodata/repomd.xml: [Errno 14] HTTP Error 403 - Forbidden
+Trying other mirror.
+
+
+I found that nginx couldn’t read the repo folders. This is apparently an SELinux thing. The following commands resolved the issue:
+
+# yum install -y policycoreutils-devel
+# grep nginx /var/log/audit/audit.log | audit2allow -M nginx
+# semodule -i nginx.pp
+
+
+============ usig apache ===========================
+vi /etc/httpd/conf.d/vhost.conf
+
+NameVirtualHost *:80
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@example.com
+    ServerName 104.196.188.53
+    ServerAlias 104.196.188.53
+    DocumentRoot /var/www/html/repos/
+    ErrorLog /var/log/httpd/error.log
+    CustomLog /var/log/httpd/access.log combined
+</VirtualHost>
+
+https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-centos-7
+
+comment out default content from /etc/httpd/conf.d/welcome.conf (to avoid ndefault landing page)
