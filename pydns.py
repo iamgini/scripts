@@ -20,7 +20,7 @@ def pinghost(hostname):
     command_line = "/bin/ping -c1 " + hostname
     args = shlex.split(command_line)
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    pingStatus = 'ok';
+    pingStatus = 'ok'
     for line in p.stdout:
         output = line.rstrip().decode('UTF-8')
         if (output.endswith('unreachable.')) :
@@ -45,13 +45,13 @@ def pinghost(hostname):
     return pingStatus
 #endDef
 
-print bcolors.INFO + 'DNS Test - ver 2.0.0.\n' + bcolors.ENDC
+print (bcolors.INFO + 'DNS Test - ver 2.0.0.\n' + bcolors.ENDC)
 timestart = "$(date)"
 counter = 0
 pingcount = 0
 dnscount = 0
 nodnscount = 0
-print  bcolors.OKBLUE + bcolors.UNDERLINE +'%-4s |%-18s |%-6s |%s' % ('No.',"Hostname","Ping","STATUS") + bcolors.ENDC
+print  (bcolors.OKBLUE + bcolors.UNDERLINE +'%-4s |%-18s |%-6s |%s' % ('No.',"Hostname","Ping","STATUS") + bcolors.ENDC)
 with open(myfilename,mode='r') as varfile:
   for line in varfile:
     counter = counter + 1
@@ -80,10 +80,10 @@ with open(myfilename,mode='r') as varfile:
     #else:
       #print 'Done'
     finally:
-      print startcolor + '%-4s |%-18s |%-6s |%s' % ( counter ,line,pingResponse,statusText) + bcolors.ENDC
+      print (startcolor + '%-4s |%-18s |%-6s |%s' % ( counter ,line,pingResponse,statusText) + bcolors.ENDC)
 
 varfile.close() #close the file
 
 timeend = "$(date)"
-print bcolors.OKBLUE + "\n======================== Summary ======================================" + bcolors.ENDC
-print bcolors.OKGREEN , dnscount , "with DNS |" + bcolors.WARNING , nodnscount , "without DNS |" + bcolors.OKGREEN , pingcount , " reachable" + bcolors.ENDC
+print (bcolors.OKBLUE + "\n======================== Summary ======================================" + bcolors.ENDC)
+print (bcolors.OKGREEN , dnscount , "with DNS |" + bcolors.WARNING , nodnscount , "without DNS |" + bcolors.OKGREEN , pingcount , " reachable" + bcolors.ENDC)
