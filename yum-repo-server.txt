@@ -148,4 +148,7 @@ NameVirtualHost *:80
 
 https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-centos-7
 
-comment out default content from /etc/httpd/conf.d/welcome.conf (to avoid ndefault landing page)
+- comment out default content from /etc/httpd/conf.d/welcome.conf (to avoid ndefault landing page)
+- enable directory list (Options Indexes FollowSymLinks) in /etc/apache2/apache2.conf (or relavent httpd file)
+
+
