@@ -1,2 +1,27 @@
 Setup a Yum repo server
 ======================
+
+https://access.redhat.com/labs/yumrepoconfighelper/
+
+https://www.tecmint.com/setup-local-http-yum-repository-on-centos-7/
+
+- install nginx
+# yum install epel-release
+# yum install nginx     
+
+- enable and start nginx
+# systemctl start nginx
+# systemctl enable nginx
+# systemctl status nginx
+
+- enable http and https in firewall
+# firewall-cmd --zone=public --permanent --add-service=http
+# firewall-cmd --zone=public --permanent --add-service=https
+# firewall-cmd --reload
+
+- install yum-utils
+# yum install createrepo  yum-utils
+
+- create directories for repo files
+# mkdir -p /var/www/html/repos/{base,centosplus,extras,updates}
+
