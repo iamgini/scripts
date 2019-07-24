@@ -1,7 +1,9 @@
 # to test email from python
 import smtplib
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
+#from email.MIMEMultipart import MIMEMultipart
+from email.mime.multipart import MIMEMultipart
+#from email.MIMEText import MIMEText
+from email.mime.text import MIMEText
 
 email_from_addr = "myfromemail@gmail.com"
 email_to_addr = "mytoemail@gmail.com"
@@ -41,6 +43,8 @@ message.attach(MIMEText(body, 'html'))
 #print (email_body)
 
 server = smtplib.SMTP(email_smtp_server,int(email_smtp_port))
+#server = smtplib.SMTP(email_smtp_server, int(email_smtp_port), timeout=30,)
+
 text = message.as_string()
 server.starttls()
 server.login(email_user, email_password)
