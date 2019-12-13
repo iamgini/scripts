@@ -18,7 +18,7 @@ www.techbeatly.com
 
 ## `blink.sh`
 
-...
+A small example on `printf` and `sleep` in two nested `for` loops.
 
 ## `dns_test.sh`
 
