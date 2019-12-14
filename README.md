@@ -26,22 +26,20 @@ DNS Test - ver 1.3.0.
 - `-p` to get ping result
 - `-h` to print help
 
-"Single" column shows the number of DNS entries (multi-dns).
-
 Note:
 add your node names or IP address in a file named "`ping.txt`" in same
 directory and run the script.
 
 Sample output:
 ```
-Total servers to test DNS/Ping : 6
-No.  |Hostname           |Ping   |Single? |STATUS
-1    |ams-n-001          |P_YES  |1       |ams-n-001.labs.colorvibes.in |192.168.94.196 |[Reverse] 196.94.168.192.in-addr.arpa
-2    |cbj-a-001          |P_YES  |1       |cbj-a-001.labs.colorvibes.in |192.168.94.197 |[Reverse] 197.94.168.192.in-addr.arpa
-3    |ams-n-011-mgt      |P_YES  |1       |ams-n-011-mgt.labs.colorvibes.in |192.168.94.4 |[Reverse] 4.94.168.192.in-addr.arpa
-4    |apc-a-010-mgt      |P_YES  |1       |apc-a-010-mgt.labs.colorvibes.in |192.168.94.5 |[Reverse] 5.94.168.192.in-addr.arpa
-5    |ams-n-110-403      |P_YES  |1       |ams-n-110-403.labs.colorvibes.in |192.168.94.132 |[Reverse] 132.94.168.192.in-addr.arpa
-6    |ams-a-111-403      |P_YES  |1       |ams-a-111-403.labs.colorvibes.in |192.168.94.133 |[Reverse] 133.94.168.192.in-addr.arpa
+6 total servers to test in: ping.txt
+No.  |Hostname           |Ping |#   |STATUS
+1    |ams-n-001          |YES  |1   |ams-n-001.labs.colorvibes.in |192.168.94.196 |[Reverse] 196.94.168.192.in-addr.arpa
+2    |cbj-a-001          |YES  |1   |cbj-a-001.labs.colorvibes.in |192.168.94.197 |[Reverse] 197.94.168.192.in-addr.arpa
+3    |ams-n-011-mgt      |YES  |1   |ams-n-011-mgt.labs.colorvibes.in |192.168.94.4 |[Reverse] 4.94.168.192.in-addr.arpa
+4    |apc-a-010-mgt      |YES  |1   |apc-a-010-mgt.labs.colorvibes.in |192.168.94.5 |[Reverse] 5.94.168.192.in-addr.arpa
+5    |ams-n-110-403      |YES  |1   |ams-n-110-403.labs.colorvibes.in |192.168.94.132 |[Reverse] 132.94.168.192.in-addr.arpa
+6    |ams-a-111-403      |YES  |1   |ams-a-111-403.labs.colorvibes.in |192.168.94.133 |[Reverse] 133.94.168.192.in-addr.arpa
 
 ======================== Summary ======================================
 6 with DNS and 0 without DNS (out of 6)
@@ -50,6 +48,7 @@ No.  |Hostname           |Ping   |Single? |STATUS
 Started at    : Wed Aug 16 04:14:37 CEST 2017
 Completed at  : Wed Aug 16 04:14:37 CEST 2017
 ```
+Where "#" column shows the number of DNS entries (multi-dns).
 
 ## `docker-zombiehunter.sh`
 

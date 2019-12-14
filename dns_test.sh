@@ -1,117 +1,105 @@
-#! /bin/sh
-# Version 1.3.0 - net.gini@gmail.com
-LINE="$(wc -l ping.txt | awk '{print$1}')"
+#!/bin/sh
 
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-CYAN='\033[0;36m'
-YELLOW='\033[0;33m'
-GREEN='\033[0;32m'
-NC='\033[0m' # No Color
-
-printf "${CYAN}DNS Test - ver 1.3.0.\n-p to get ping result\n-h to print help\n\"Single\" column shows the number of DNS entries (multi-dns).${NC}\n"
-
-SHOWPING="NO"
 while getopts "ph" option
 do
         case "${option}"
         in
-                d) SHOWDNS="YES";;
-                p) SHOWPING="YES";;
-                h) SHOWHELP="YES";;
-                *)
-                        usage
-                   ;;
-
+                d) ShowDNS="YES"; shift ;;
+                p) ShowPing="YES"; shift ;;
+                h) ShowHelp="YES";;
+                *) exit 1 ;;
         esac
 done
-#==check help only or not==
-if [ -n "$SHOWHELP" ]
+
+if [ -n "$ShowHelp" ]
 then
         echo ""
         echo "-h Print this help"
         #echo "-d Check DNS"
         echo "-p Check PING"
         echo "Any bugs ? Contact net.gini@gmail.com"
+        exit 0
+fi
+
+File="${1:-ping.txt}"
+if [ ! -f "$File" ]
+then
+        echo "Servers list '$File' Not found." >&2
         exit 1
 fi
 
-printf "\nTotal servers to test DNS/Ping : $LINE\n"
-printf "${CYAN}%-4s |%-18s |%-6s |%-7s |%s${NC}" "No." "Hostname" "Ping" "Single?" "STATUS"
-printf "\n"
-counter=1
-yescount=0
-nocount=0
-PING=0
-RED='\033[0;31m'
-NC='\033[0m' # No Color
-TIMESTART="$(date)"
-while [ $counter -le $LINE ]
-do
-        MYHOST=$(awk NR==$counter ping.txt|tr '[:upper:]' '[:lower:]')
-        HOSTPING="-"
-        #nslookup $(awk NR==$counter ping.txt) | grep Name | awk '{print$2}'
-        #echo $(awk NR==$counter ping.txt)
-        DNS_NAME=$(nslookup $MYHOST | grep Name | tail -1 |awk '{print$2}' 2> /dev/null)
-        DNS_NAME_IP=$(host $MYHOST | egrep "domain name pointer" | tail -1 |awk '{print$5}' 2> /dev/null)
+AllLines="$( grep -cv '^[[:space:]]*#?' "$File" )"
+ColorR='\033[0;31m' # red
+#ColorB='\033[0;34m' # blue
+ColorC='\033[0;36m' # cyan
+ColorY='\033[0;33m' # yellow
+ColorG='\033[0;32m' # green
+ColorN='\033[0m' # Normal (reset)
 
-        if [ -n "$DNS_NAME" ];then
-                #echo "$(awk NR==$counter ping.txt) : DNS FOUND - $DNS_NAME"
-                #"$(awk NR==$counter ping.txt) : DNS FOUND - $DNS_NAME"
-                ip=$(nslookup $(awk NR==$counter ping.txt) |grep Address|grep -v "#"| tail -1 |awk '{print$2}')
-                #echo "$ip"
-                myarpa=$(nslookup $ip | grep arpa | tail -1 | awk '{print$1}')
+printf "\n$AllLines total servers to test in: $File\n"
+printf "${ColorC}%-4s |%-18s |%-4s |%-3s |%s${ColorN}\n" "No." "Hostname" "Ping" "#" "STATUS"
+ThisLine=1
+YesCount=0
+NoCount=0
+HasPing=0
+TimeStart="$( date )"
+while [ $ThisLine -le $AllLines ]
+do
+        MyHost=$( grep -v '^[[:space:]]*#?' "$File" | awk "NR==$ThisLine {tolower(\$0) ;print \$1}" )
+        HostPing="N/A"
+        NS_Name=$( nslookup $MyHost | awk '/Name/ {print $2}' 2> /dev/null | tail -1 )
+        NS_Pointer=$( host $MyHost | awk '/domain name pointer/ {print $5}' 2> /dev/null | tail -1 )
+
+        if [ -n "$NS_Name" ]
+        then
+                ip=$( nslookup $MyHost | awk '/Address/ {print $2}' | tail -1 )
+                MyARPA=$( nslookup $ip | awk '/arpa/ {print $1}' | tail -1 )
 
                 #find multiple IP
-                DNS_NAMES=$(nslookup $(awk NR==$counter ping.txt) | grep Name | wc -l 2> /dev/null)
-                yescount=$(( $yescount + 1 ))
-                #echo "$(awk NR==$counter ping.txt) : DNS FOUND $DNS_NAME       $MYIP   $MYARPA"
-                if [ "$SHOWPING" == "YES" ];then
-                        TOTAL=$(ping -c3 "$DNS_NAME" | grep received | awk '{print$4}' 2> /dev/null)
-                        if [ $TOTAL -gt 0 ];then
-                                HOSTPING="P-YES"
-                                PING=$((PING + 1))
+                NS_Alias=$( nslookup $MyHost | grep -cs 'Name' )
+                YesCount=$(( YesCount + 1 ))
+                if [ -n "$ShowPing" ]
+                then
+                        MyPing=$( ping -c3 "$NS_Name" 2>/dev/null | awk '/received/ {print $4}' )
+                        if [ $(( MyPing )) -gt 0 ]
+                        then
+                                HostPing="YES"
+                                HasPing=$(( HasPing + 1 ))
+                        else
+                                HostPing="ERR"
                         fi
                 fi
-                #printf "$DNS_NAME\t$ip\t$myarpa\n"
-                printf "%-4s |%-18s |%-6s |%-7s |%s" $counter $MYHOST $HOSTPING $DNS_NAMES "$DNS_NAME |$ip |[Reverse] $myarpa"
-                printf "\n"
-                #TOTAL=$(ping -c3 "$DNS_NAME" | grep received | awk '{print$4}' 2> /dev/null)
-        elif [ -n "$DNS_NAME_IP" ];then
-                #printf "\n$DNS_NAME_IP"
-                myarpa=$(host $MYHOST | egrep "domain name pointer" | tail -1 |awk '{print$1}' 2> /dev/null)
-                DNS_NAMES_IP=$(host $MYHOST | egrep "domain name pointer" | wc -l 2> /dev/null)
-                yescount=$(( $yescount + 1 ))
+                printf "%-4s |%-18s |%-4s |%-3s |%s\n" $ThisLine $MyHost $HostPing $NS_Alias "$NS_Name |$ip |[Reverse] $MyARPA"
+        elif [ -n "$NS_Pointer" ]
+        then
+                MyARPA=$( host $MyHost | awk '/domain name pointer/ {print $1}' 2> /dev/null | tail -1 )
+                NS_Address=$( host $MyHost | grep -cs "domain name pointer" )
+                YesCount=$(( YesCount + 1 ))
 
-                if [ "$SHOWPING" == "YES" ];then
-                        TOTAL=$(ping -c3 "$DNS_NAME_IP" | grep received | awk '{print$4}' 2> /dev/null)
-                        if [ $TOTAL -gt 0 ];then
-                                HOSTPING="P-YES"
-                                PING=$((PING + 1))
+                if [ -n "$ShowPing" ]
+                then
+                        MyPing=$( ping -c3 "$NS_Pointer" 2>/dev/null | awk '/received/ {print $4}' 2> /dev/null)
+                        if [ $(( MyPing )) -gt 0 ]
+                        then
+                                HostPing="YES"
+                                HasPing=$(( HasPing + 1 ))
+                        else
+                                HostPing="ERR"
                         fi
                 fi
-                printf "%-4s |%-18s |%-6s |%-7s |%s" $counter $MYHOST $HOSTPING $DNS_NAMES_IP "$DNS_NAME_IP |$MYHOST |$myarpa"
-                printf "\n"
+                printf "%-4s |%-18s |%-4s |%-3s |%s\n" $ThisLine $MyHost $HostPing $NS_Address "$NS_Pointer |$MyHost |$MyARPA"
         else
-                #printf "$(awk NR==$counter ping.txt) : ${RED}NO DNS Entry Found${NC}\n"
-                printf "%-4s |%-18s |%-6s |%-7s |%s" $counter $MYHOST $HOSTPING "0" "NO DNS Entry Found"
-                printf "\n"
-                nocount=$(( $nocount + 1 ))
+                printf "%-4s |%-18s |%-4s |%-3s |%s\n" $ThisLine $MyHost $HostPing "0" "NO DNS Entry Found"
+                NoCount=$(( NoCount + 1 ))
 
         fi
-
-        #nslookup $(awk NR==$counter ping.txt) |egrep "Name|SERVFAIL"
-        #nslookup $(awk NR==$counter ping.txt) |grep Address|grep -v "#"|awk '{print$2}'
-                #ip=$(nslookup $(awk NR==$counter ping.txt) |grep Address|grep -v "#"|awk '{print$2}')
-                #echo "$ip"
-                #nslookup $ip | grep arpa
-
-        counter=$(( $counter + 1 ))
+        ThisLine=$(( ThisLine + 1 ))
 done
 printf "\n======================== Summary ======================================\n"
-printf "${GREEN}$yescount ${NC}with DNS and ${YELLOW}$nocount ${NC}without DNS (out of $LINE)\n"
-if [ "$SHOWPING" == "YES" ];then
-        printf "$PING items alive\n"
+printf "${ColorG}$YesCount ${ColorN}with DNS and ${ColorY}$NoCount ${ColorN}without DNS (out of $AllLines)"
+if [ -n "$ShowPing" ]
+then
+        printf "\t$HasPing items alive"
 fi
-printf "\nStarted at    : $TIMESTART\n"
+printf "\n\nStarted at    : $TimeStart\n"
 printf "Completed at  : $(date)\n"
