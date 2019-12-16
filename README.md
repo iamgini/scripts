@@ -52,6 +52,12 @@ Where "#" column shows the number of DNS entries (multi-dns).
 
 ## `docker-zombiehunter.sh`
 
+Little helper to deal with defunct containers.
+
+1. Find and list zombi processes.
+2. Check and list processes that are Docker pods.
+3. When such bad pods exist, list or restart them.
+
 ## `get_oa_info.sh`
 
 This is a very basic script to collect blade information from an HP C7000
