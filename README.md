@@ -160,5 +160,5 @@ Completed at  : Wed Aug 16 04:14:57 2017
 
 ## `python-email.py`
 
-...
+Template script for sending email from a Python script. Not tested.
 
