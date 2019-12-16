@@ -32,21 +32,21 @@ directory and run the script.
 
 Sample output:
 ```
-6 total servers to test in: ping.txt
-No.  |Hostname           |Ping |#   |STATUS
-1    |ams-n-001          |YES  |1   |ams-n-001.labs.colorvibes.in |192.168.94.196 |[Reverse] 196.94.168.192.in-addr.arpa
-2    |cbj-a-001          |YES  |1   |cbj-a-001.labs.colorvibes.in |192.168.94.197 |[Reverse] 197.94.168.192.in-addr.arpa
-3    |ams-n-011-mgt      |YES  |1   |ams-n-011-mgt.labs.colorvibes.in |192.168.94.4 |[Reverse] 4.94.168.192.in-addr.arpa
-4    |apc-a-010-mgt      |YES  |1   |apc-a-010-mgt.labs.colorvibes.in |192.168.94.5 |[Reverse] 5.94.168.192.in-addr.arpa
-5    |ams-n-110-403      |YES  |1   |ams-n-110-403.labs.colorvibes.in |192.168.94.132 |[Reverse] 132.94.168.192.in-addr.arpa
-6    |ams-a-111-403      |YES  |1   |ams-a-111-403.labs.colorvibes.in |192.168.94.133 |[Reverse] 133.94.168.192.in-addr.arpa
+DNS test - ver 1.3.0
+
+No.  |File entry         |Ping |#   |DNS status (fqdn,ip,ptr)
+1    |ams-n-001          |YES  |1   |ams-n-001.labs.colorvibes.in,192.168.94.196,196.94.168.192.in-addr.arpa
+2    |cbj-a-001          |YES  |1   |cbj-a-001.labs.colorvibes.in,192.168.94.197,197.94.168.192.in-addr.arpa
+3    |ams-n-011-mgt      |YES  |1   |ams-n-011-mgt.labs.colorvibes.in,192.168.94.4,4.94.168.192.in-addr.arpa
+4    |apc-a-010-mgt      |YES  |1   |apc-a-010-mgt.labs.colorvibes.in,192.168.94.5,5.94.168.192.in-addr.arpa
+5    |ams-n-110-403      |YES  |1   |ams-n-110-403.labs.colorvibes.in,192.168.94.132,132.94.168.192.in-addr.arpa
+6    |ams-a-111-403      |YES  |1   |ams-a-111-403.labs.colorvibes.in,192.168.94.133,133.94.168.192.in-addr.arpa
 
 ======================== Summary ======================================
-6 with DNS and 0 without DNS (out of 6)
-6 items alive
+ping.txt	 6 with DNS	 0 without DNS	 6 reachable
 
-Started at    : Wed Aug 16 04:14:37 CEST 2017
-Completed at  : Wed Aug 16 04:14:37 CEST 2017
+Started at    : Wed Aug 16 04:14:27 CEST 2017
+Completed at  : Wed Aug 16 04:14:57 CEST 2017
 ```
 Where "#" column shows the number of DNS entries (multi-dns).
 
@@ -138,6 +138,25 @@ Bay     NIC
 Note:
 add your node names or IP address in a file named "`ping.txt`" in same
 directory and run the script.
+
+Sample output:
+```
+DNS test - ver 2.1.0
+
+No.  |File entry         |Ping |DNS status (fqdn,ip)
+1    |ams-n-001          |ok   |ams-n-001.labs.colorvibes.in,192.168.94.196
+2    |cbj-a-001          |ok   |cbj-a-001.labs.colorvibes.in,192.168.94.197
+3    |ams-n-011-mgt      |ok   |ams-n-011-mgt.labs.colorvibes.in,192.168.94.4
+4    |apc-a-010-mgt      |ok   |apc-a-010-mgt.labs.colorvibes.in,192.168.94.5
+5    |ams-n-110-403      |ok   |ams-n-110-403.labs.colorvibes.in,192.168.94.132
+6    |ams-a-111-403      |ok   |ams-a-111-403.labs.colorvibes.in,192.168.94.133
+
+======================== Summary ======================================
+ping.txt	 6 with DNS	 0 without DNS	 6 reachable
+
+Started at    : Wed Aug 16 04:14:27 2017
+Completed at  : Wed Aug 16 04:14:57 2017
+```
 
 ## `python-email.py`
 

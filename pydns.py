@@ -8,7 +8,7 @@ import subprocess, shlex
 from datetime import datetime
 
 class Color:
-    B = '\033[94m' # blue (info)
+    B = '\033[94m' # blue (version info)
     G = '\033[92m' # green (success)
     Y = '\033[93m' # yellow/orange (warning)
     R = '\033[91m' # red (fail)
@@ -54,13 +54,13 @@ else:
     File = 'ping.txt'
 try:
   with open(File, mode='r') as AllLines:
-    print (Color.B + 'DNS Test - ver 2.0.0.\n' + Color.N)
+    print (Color.B + 'DNS test - ver 2.1.0.\n' + Color.N)
     TimeStart = datetime.now()
     ThisLine = 0
     HasPing = 0
     YesCount = 0
     NotCount = 0
-    print  (Color.C + '%-4s |%-18s |%-4s |%s' % ('No.',"Hostname","Ping","DNS status (fqdn,ip)") + Color.N)
+    print  (Color.C + '%-4s |%-18s |%-4s |%s' % ('No.',"File entry","Ping","DNS status (fqdn,ip)") + Color.N)
     for MyHost in AllLines:
         ThisLine = ThisLine + 1
         MyHost = MyHost.replace('\n','')
@@ -90,7 +90,7 @@ try:
           print (startcolor + '%-4s |%-18s |%-4s |%s' % (ThisLine,MyHost,HostPing,statusText) + Color.N)
     TimeStop = datetime.now()
     print (Color.C + "\n======================== Summary ======================================" + Color.N)
-    print (Color.G + " %s with DNS\t" % (YesCount) + Color.Y + " %s without DNS\t" % (NotCount) + Color.G + " %s reachable" %(HasPing) + Color.N)
+    print (File + "\t" + Color.G + " %s with DNS\t" % (YesCount) + Color.Y + " %s without DNS\t" % (NotCount) + Color.G + " %s reachable" %(HasPing) + Color.N)
     # %c = %a %b %d %H:%M:%S %Y
     print ("\nStarted at    : " + TimeStart.strftime("%c") + "\nCompleted at  : " + TimeStop.strftime("%c") )
 except IOError:
