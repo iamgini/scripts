@@ -77,50 +77,64 @@ Sample output:
 Checking details of AMSTERDAM-B001
 Pseudo-terminal will not be allocated because stdin is not a terminal.
 
--------------------------------------------------------
+=========================================================================
 Enclosure Serial Number         :       SGHXYZWXYZ
--------------------------------------------------------
-Bay     Blade Type      Model                   BladeName       SERIALNUM       BootMode        ILO IP          Firmware :ROM, ILO, PowerMngmt
-1       Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00101 STH622XYZ                      156.31.19.97    [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-2       Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00102 STH622XYZ                      156.31.19.98    [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-3       Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00103 STH622XYZ                      156.31.19.99    [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-4       Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00104 STH622XYZ                      156.31.19.100   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-5       Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00105 STH622XYZ                      156.31.19.101   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-6       Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00106 STH622XYZ                      156.31.19.102   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-7       Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00107 STH622XYZ                      156.31.19.103   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-8       Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00108 STH622XYZ                      156.31.19.104   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-9       Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00109 STH622XYZ                      156.31.19.105   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-10      Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00110 STH622XYZ                      156.31.19.106   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-11      Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00111 STH622XYZ                      156.31.19.107   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-12      Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00112 STH622XYZ                      156.31.19.108   [I31 06/01/2015] [2.50 Sep 23 2016] [3.3.0]
-13      Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00113 STH622XYZ                      156.31.19.109   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-14      Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00114 STH622XYZ                      156.31.19.110   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
-15      Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00115 STH622XYZ                      156.31.19.111   [I31 06/01/2015] [2.50 Sep 23 2016] [3.3.0]
-16      Server Blade    ProLiant WS460c Gen8    AMSTERDAM-B00116 STH622XYZ                      156.31.19.112   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+-------------------------------------------------------------------------
+Bay	Blade Type	Model	BladeName	SerialNum	BootMode	ILO IP		[Firmware ROM]	[ILO ver.]	[PowerMngmt ver.]
+1	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00101				STH622XYZ	156.31.19.97    [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+2	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00102				STH622XYZ	156.31.19.98    [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+3	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00103				STH622XYZ	156.31.19.99    [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+4	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00104				STH622XYZ	156.31.19.100   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+5	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00105				STH622XYZ	156.31.19.101   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+6	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00106				STH622XYZ	156.31.19.102   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+7	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00107				STH622XYZ	156.31.19.103   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+8	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00108				STH622XYZ	156.31.19.104   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+9	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00109				STH622XYZ	156.31.19.105   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+10	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00110				STH622XYZ	156.31.19.106   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+11	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00111				STH622XYZ	156.31.19.107   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+12	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00112				STH622XYZ	156.31.19.108   [I31 06/01/2015] [2.50 Sep 23 2016] [3.3.0]
+13	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00113				STH622XYZ	156.31.19.109   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+14	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00114				STH622XYZ	156.31.19.110   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
+15	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00115				STH622XYZ	156.31.19.111   [I31 06/01/2015] [2.50 Sep 23 2016] [3.3.0]
+16	Server Blade	ProLiant	WS460c	Gen8	AMSTERDAM-B00116	STH622XYZ	156.31.19.112   [I31 12/14/2012] [1.51 Jun 16 2014] [3.1]
 
+=========================================================================
 Bladecenter Switches
-Product Name: Cisco Catalyst Blade Switch 3120X for HP  FOC1XX1T0XY
-Product Name: Cisco Catalyst Blade Switch 3120X for HP  FOC1XX1T0XY
+-------------------------------------------------------------------------
+Product Name	Serial
+Cisco Catalyst Blade Switch 3120X for HP	FOC1XX1T0XY
+Cisco Catalyst Blade Switch 3120X for HP	FOC1XX1T0XY
 
-Bay     CPU, Memory
-1       2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-2       2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-3       2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-4       2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-5       2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-6       2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-7       2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-8       2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-9       2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-10      2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-11      2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-12      2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-13      2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-14      2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-15      2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
-16      2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores) 65536 MB
+=========================================================================
+Onboard Administrators
+-------------------------------------------------------------------------
+Name	Address	NetMask	Gateway	MAC	Serial	Role	Firmware Ver.
+amsterdam-b001	192.1.4.5	255.255.255.0	192.1.4.1	XX:XX:XX:XX:XX:XX	  XXXXXXXXXX	Active	4.85
+amsterdam-b002	192.1.4.7	255.255.255.0	192.1.4.1	XX:XX:XX:XX:XX:XX	XXXXXXXXXX	Standby	4.85
 
-Bay     NIC
+=========================================================================
+Servvers Information
+-------------------------------------------------------------------------
+Bay	CPU1, CPU2	Memory
+1	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+2	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+3	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+4	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+5	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+6	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+7	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+8	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+9	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+10	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+11	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+12	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+13	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+14	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+15	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+16	2 x  Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz (6 cores)	65536 MB
+
+-------------------------------------------------------------------------
+Bay     NIC (NIC1, NIC2, ILO)
 1       |NIC1:AC:16:XX:B3:XX:YY|NIC2:AC:XX:2D:B3:XX:YY|MACAddress:D8:9D:67:XX:YY:ZZ
 2       |NIC1:D8:9D:XX:62:XX:YY|NIC2:D8:XX:67:62:XX:YY|MACAddress:D8:9D:67:XX:YY:ZZ
 3       |NIC1:D8:9D:XX:62:XX:YY|NIC2:D8:XX:67:62:XX:YY|MACAddress:D8:9D:67:XX:YY:ZZ

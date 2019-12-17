@@ -44,14 +44,15 @@ temp_files="commands_for_oa oa_output temp1 temp2"
 # Generate random name for cmds and output file
 for i in $temp_files; do
   if command -v mktemp >/dev/null; then
-    eval "RANDOM_$i=$( mktemp -p '/tmp' '.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )"
-  elif command -v fold >/dev/null; then
-    random=$( cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1 )
-    eval "RANDOM_$i='/tmp/.$random'"
-    eval "touch \$RANDOM_$i"
+    eval "RANDOM_$i=$( mktemp -p '/tmp' '.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )" || exit 2
   else
-    echo "Unable to create temporary files" >&2
-    exit 2
+    if command -v fold >/dev/null; then
+      random=$( cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1 )
+    else
+      random=".$$-$( date '+%s.%N' )"
+    fi
+    eval "RANDOM_$i='/tmp/.$random'"
+    eval "touch \$RANDOM_$i" || exit 2
   fi
 done
 
@@ -73,14 +74,16 @@ ssh -q -l "${2:-Administrator}" $BladeCenter <"$RANDOM_commands_for_oa" >"$RANDO
 
 newcounter=1
 BAYCOUNT=0
-line1="\n---------------------------------------------\n"
+line0="\n-------------------------------------------------------------------------\n"
+line0="\n"
+line1="\n-------------------------------------------------------------------------\n"
 line2="\n=========================================================================\n"
-HEADER01="Bay\tBlade Type\tModel\t\t\tBladeName\tSERIALNUM\tBootMode\tILO IP\t\tFirmware :ROM, ILO, PowerMngmt\n"
-printf "\nBay\tCPU, Memory$line1" >"$RANDOM_temp1"
-printf "\nBay\tNIC (NIC1, NIC2, iLO NIC)$line1" >"$RANDOM_temp2"
-HEADER02="Enclosure (Serial Number) \t: "
-HEADER03="\nBladecenter Switches$line1"
-HEADER04="\nOnboard Administrators (Name, Network, MAC, Serial, Role, FW)$line1"
+HEADER01="Bay\tBlade Type\tModel\t\t\tBladeName\tSerialNum\tBootMode\tILO IP\t\t[Firmware ROM]\t[ILO ver.]\t[PowerMngmt ver.]$line0"
+printf "${line1}Bay\tCPU1, CPU2\tMemory$line0" >"$RANDOM_temp1"
+printf "${line1}Bay\tNIC (NIC1, NIC2, iLO NIC)$line0" >"$RANDOM_temp2"
+HEADER02="${line2}Enclosure (Serial Number) \t: "
+HEADER03="${line2}Bladecenter Switches${line1}Product Name\tSerial$line0"
+HEADER04="${line2}Onboard Administrators${line1}Name\tAddress\tNetMask\tGateway\tMAC\tSerial\tRole\tFirmware Ver.$line0"
 while read line; do
   SERVERNAME="#"
   for i in 'ROMVERSION' 'BOOTMODE' 'CPU1' 'CPU2' 'MEMORY' 'ILOROM' 'ILOIP' 'PMROM'; do
@@ -104,7 +107,6 @@ while read line; do
       printf "$BAYCOUNT\tNo Blade Installed\n"
     else
       # Clean up variable to be used
-      NICCOUNT=0
       for i in 'PRODUCTNAME' 'SERIALNUM' 'SERVERNAME' 'ROMVERSION' 'BOOTMODE' 'CPU1' 'CPU2' 'NICA' 'ILOROM' 'ILOIP' 'PMROM' 'NICA' 'NICALL' 'CPUALL' ; do
         eval "$i=''"
       done
@@ -132,9 +134,8 @@ while read line; do
         elif echo "$line" | grep -qs 'Memory:'; then
           MEMORY=$( echo "$line" | awk '{print $2,$3}' )
         elif echo "$line" | grep "..:..:..:*" | grep -qvs "iSCSI\|HBA"; then
-          NICA=$( echo "$line" | sed "s/ //g" )
-          NICCOUNT=$(( NICCOUNT + 1 ))
-          NICALL="$NICALL|$NICA"
+          NICA=$( echo "$line" | sed "s/  / /g" )
+          NICALL="$NICALL| $NICA"
         elif echo "$line" | grep -qs 'Firmware Version:'; then
           ILOROM=$( echo "$line" | cut -c 19- )
           #ILOROM=$( echo "$line" | awk -F ': ' '{print $2}' )
@@ -167,7 +168,7 @@ while read line; do
     done
     ENCSERIALNUM="$( echo "$line" | awk '{print $3}' )"
     if [ -n "$HEADER02" ]; then
-      printf "$line2$HEADER02\t$BladeCenter ($ENCSERIALNUM)$line2"
+      printf "$HEADER02\t$BladeCenter ($ENCSERIALNUM)$line1"
       HEADER02=""
     fi
   fi
@@ -178,7 +179,7 @@ while read line; do
         HEADER03=""
       fi
       read line
-      SWITCHMODEL="$line"
+      SWITCHMODEL=$( echo "$line" | awk -F ': ' '{print $2}' )
       for i in 1 2 3 4 5 6 7; do
         read line
       done
@@ -195,7 +196,7 @@ while read line; do
     done
     OA_C=0
     read line
-    NAME="$line"
+    NAME=$( echo "$line" | awk '{print $2}' )
     while [ $OA_C -lt 100 ]; do
       read line
       if echo "$line" | grep -qs 'IPv4 Address:'; then
@@ -209,8 +210,7 @@ while read line; do
       elif echo "$line" | grep -qs 'Serial Number :'; then
         OASER=$( echo "$line" | awk '{print $4}' )
       elif echo "$line" | grep -qs "Firmware Ver. :"; then
-        OAFW="$line"
-        #OAFW=$( echo "$line" | awk '{print $4}' )
+        OAFW=$( echo "$line" | awk '{print $4}' )
       elif echo "$line" | grep -qs 'Role:'; then
         OAROLE=$( echo "$line" | awk '{print $2}' )
       fi
@@ -229,6 +229,7 @@ done <"$RANDOM_oa_output"
 
 # Display details only if OA login success
 if grep -qs "Enclosure Information" "$RANDOM_oa_output"; then
+  printf "${line2}Servers Information"
   cat "$RANDOM_temp1"
   cat "$RANDOM_temp2"
 else
