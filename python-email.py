@@ -1,8 +1,8 @@
+#!/usr/bin/python
 # to test email from python
+
 import smtplib
-#from email.MIMEMultipart import MIMEMultipart
 from email.mime.multipart import MIMEMultipart
-#from email.MIMEText import MIMEText
 from email.mime.text import MIMEText
 
 email_from_addr = "myfromemail@gmail.com"

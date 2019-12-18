@@ -1,14 +1,11 @@
-#!/bin/bash
-# blink.sh
-
+#!/bin/sh
 
 printf 'Working'
-for ((i = 0; i < 5; ++i)); do
-    for ((j = 0; j < 4; ++j)); do
+for i in 0 1 2 3 4; do
+    for j in 0 1 2 3; do
         printf .
         sleep 5
     done
-
     printf '\b\b\b\b    \b\b\b\b'
 done
-printf '....done\n'
+echo '....done'

@@ -1,24 +1,25 @@
-#!/bin/bash
+#!/bin/sh
 # Purpose: Matches zombie processes with the parent docker containers if possible.
 # Usage: /usr/local/bin/zombiehunter.sh
 # v2.0 with pod and project details
-# Author: Fekete Zoltán (Z-Fekete@t-systems.com)
+# Adapted from: Fekete Zoltán (Z-Fekete@t-systems.com)
 
-echo -e "\nZombies:"
-ZOMBIES="$(ps -ef | grep '<defunct>' | grep -v grep | tee >(cat 1>&2))"
-ZOMBIEPPIDS="$(echo "$ZOMBIES" | while read _ _ A _; do ((A>1)) && echo $A; done)"
-CONTAINERS="$(for f in $(docker ps -q); do echo -n "$f "; docker inspect -f '### {{.State.Pid}} {{.Config.Labels}}' $f; done)"
-
-[[ -n "$ZOMBIEPPIDS" ]] && [[ -n "$CONTAINERS" ]] &&
-BADCONTAINERS="$(for P in $ZOMBIEPPIDS; do grep "### $P " <<<"$CONTAINERS"; done|sort|uniq)"
-
-[[ -z "$BADCONTAINERS" ]] && echo -e "\n(found no container to restart)\n" && exit 1
-
-echo -e "\nRestart Commands ### Details:"
-
-[[ "-KILL" != "$1" ]] &&
-echo "$BADCONTAINERS"|while read B; do echo docker restart $B; done &&
-echo -e "\nPlease copy and run the restart commands manually or re-run with -KILL to kill the related zombies.\n" && exit 0
-
-[[ "$1" == "-KILL" ]] && echo Killing... &&
-echo "$BADCONTAINERS" | while read B EXTRA; do echo Running: docker restart $B $EXTRA; docker restart $B; done
+ZombiesPID=$( ps axo pid=,stat= | awk '$2~/^Z/ {print $1}' )
+[ -z "$ZombiesPID" ] && echo "No Defunct process" && exit
+echo "Zombies: $ZombiesPID"
+AllContainers="$( docker ps --all --format '{{.ID}} {{.State.Pid}} {{.Config.Lables}}' )"
+[ -z "$AllContainers" ] && "No Docker container" && exit
+BadContainers="$( echo "$AllContainers" |
+  awk -v matches="$( echo "$ZombiesPID" | tr ' ' '|' )" -v OFS="\t" '$2~matches {print}' )"
+[ -z "$BadContainers" ] && "No Bad container found" && exit
+if [ "$1" != '-KILL' ]; then
+    echo "Please, do a \"docker restart \" on the following IDs,"
+    echo "or re-run \"$0 -KILL\" to automatically kill related."
+    printf "ID\ts.PID\ts.Config.Labels\n%b" "$BadContainers"
+else
+    echo "$BadContainers" |
+    while read B Infos; do
+        echo "Restarting $B ### $Infos"
+        docker restart $B
+    done
+fi
