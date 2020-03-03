@@ -13,13 +13,16 @@ echo Current Date : %currentDate%
 echo Current Directory : %CD%\%currentDirectory%
 ECHO ============================
 echo.
+
+:: Replace TYPE1, TYPE2 etc with the filename strings. 
+:: Date will be added in loop
 for %%J in (TYPE1 TYPE2 TYPE3 TYPE4) do (
   echo.
   echo Checking Files Type : %%J ...
   ECHO ============================
   FOR %%I in (%currentDirectory%\*%%J_%currentDate%*.txt) DO (
     echo %%I
-    :: Do your copy command or action here
+    echo Do your copy command or action here.   
   ) 
 )
 
