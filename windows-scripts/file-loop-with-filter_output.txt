@@ -1,0 +1,22 @@
+============================
+Current Date : 20200303
+Current Directory : c:\Gini\DevOps\scripts\windows-scripts\mydir
+============================
+
+
+Checking Files Type : TYPE1 ...
+============================
+mydir\TYPE1_20200303.txt
+Do your copy command or action here.
+
+Checking Files Type : TYPE2 ...
+============================
+mydir\TYPE2_20200303.txt
+Do your copy command or action here.
+
+Checking Files Type : TYPE3 ...
+============================
+
+Checking Files Type : TYPE4 ...
+============================
+Press any key to continue . . .
