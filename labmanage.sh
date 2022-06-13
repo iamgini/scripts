@@ -21,5 +21,12 @@ if [ "$1" == "gns3" ];then
         VBoxManage controlvm "GNS3 VM" acpipowerbutton
         VBoxManage controlvm "utils-fedora35" acpipowerbutton
     fi
+fi
 
+if [ "$1" == "aap" ];then
+    if [ "$2" == "start" ]; then
+        VBoxManage startvm "AnsibleController21-1" --type headless
+    elif [ "$2" == "stop" ]; then
+        VBoxManage controlvm "AnsibleController21-1" acpipowerbutton
+    fi
 fi
