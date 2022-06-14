@@ -3,13 +3,40 @@
 
 #echo $@
 
+function display_help () {
+    printf "\n"
+    printf "\nUsage  : ./labmanage.sh LAB_NAME start|stop"
+    printf "\nExample: ./labmanage.sh gns3 start"
+    printf "\n\n"
+}
+
+function display_labs () {
+    printf "\n"
+    printf "\nAvailable Labs"
+    printf "\ngns3 - GNS3 Network Automation"
+    printf "\naap  - Ansible Automation Platform (2.1)"
+    printf "\n\n"
+}
+
+function display_actions () {
+    printf "\n"
+    printf "\nInvalid actoion"
+    printf "\nstart - Start the virtual machines and services"
+    printf "\nstop  - Stop the virtual machines and services"
+    printf "\n\n"
+}
+
+
+
 if [ $# -lt 1 ]; then
-    echo "Lab name and actions required !" >&2
+    printf "\nLab name and actions required !" >&2
+    display_help
     exit 1
 fi
 
 if [ "$2" == "" ]; then
-    echo "start or stop command is required !" >&2
+    printf "\nstart or stop command is required !" >&2
+    display_help
     exit 1
 fi
 
@@ -20,13 +47,20 @@ if [ "$1" == "gns3" ];then
     elif [ "$2" == "stop" ]; then
         VBoxManage controlvm "GNS3 VM" acpipowerbutton
         VBoxManage controlvm "utils-fedora35" acpipowerbutton
+    else
+        display_actions
     fi
-fi
-
-if [ "$1" == "aap" ];then
+elif [ "$1" == "aap" ];then
     if [ "$2" == "start" ]; then
         VBoxManage startvm "AnsibleController21-1" --type headless
     elif [ "$2" == "stop" ]; then
         VBoxManage controlvm "AnsibleController21-1" acpipowerbutton
+    else
+        display_actions
     fi
+
+else
+    printf "\nNo such lab configured - $1"
+    display_labs
 fi
+
