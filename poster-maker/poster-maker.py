@@ -17,8 +17,13 @@ from urllib.parse import urlparse
 import requests
 from bs4 import BeautifulSoup
 
+# to select random images
+import random
+
 border_left = 120
-template_image = 'images/poster-template-3.png'
+template_image_list = ['poster-template-1.png', 'poster-template-2.png','poster-template-3.png','poster-template-4.png','poster-template-5.png','poster-template-6.png','poster-template-7.png','poster-template-8.png']
+#template_image = 'images/poster-template-3.png'
+template_image = 'images/' + random.choice(template_image_list)
 target_image = '/home/gmadappa/Downloads/poster-output-image.png'
 # logo_image = 'images/techbeatly-logo-v4.1-black.png'
 text_meta_description = ""
@@ -27,7 +32,7 @@ text_meta_description = ""
 # "https://www.redhat.com/en/resources/4-benefits-using-rh-solutions-on-aws?sc_cid=7013a0000026Hr2AAE"
 
 # set font
-font_title = ImageFont.truetype('fonts/Figtree-Black.ttf',size=60)
+font_title = ImageFont.truetype('fonts/Figtree-Black.ttf',size=72)
 font_site = ImageFont.truetype('fonts/Figtree-Regular.ttf',size=32)
 font_link = ImageFont.truetype('fonts/Figtree-Regular.ttf',size=24)
 
@@ -77,7 +82,7 @@ def wraptext(input_text,wrap_width):
     return caption_new
 
 # wrap the texts
-text_title_wrapped = wraptext(title_from_url,30)
+text_title_wrapped = wraptext(title_from_url,25)
 text_domain_wrapped = wraptext(text_domain,80)
 text_link_wrapped = wraptext(text_link,80)
 
@@ -94,9 +99,9 @@ I1.text((border_left, 380), text_title_wrapped, font=font_title, fill=(0, 0, 0))
 ## Post description
 if len(text_meta_description) > 1:
     text_meta_description_wrapped = wraptext(text_meta_description,60)
-    I1.text((border_left, 600), text_meta_description_wrapped, font=font_site, fill=(0, 0, 0))
+    I1.text((border_left, 700), text_meta_description_wrapped, font=font_site, fill=(0, 0, 0))
 ## link
-I1.text((border_left, 800), text_link_wrapped, font=font_link, fill=(0, 0, 0))
+I1.text((border_left, 900), text_link_wrapped, font=font_link, fill=(0, 0, 0))
 
 ## add logo
 # image_logo = Image.open(logo_image)
