@@ -43,76 +43,84 @@ if len(sys.argv)>1:
     text_link = sys.argv[1]
 else:
     print("Missing url!")
-    sys.exit()
+    text_link = input("Enter the URL: ")
+    if len(text_link) <1:
+        print('Missing url...exiting')
+        sys.exit()
+    else:
+        print("Fetching details from: " + text_link)
 
-# making requests instance
-reqs = requests.get(text_link)
-# using the BeautifulSoup module
-soup = BeautifulSoup(reqs.text, 'html.parser')
+try:
+    # making requests instance
+    reqs = requests.get(text_link)
+    # using the BeautifulSoup module
+    soup = BeautifulSoup(reqs.text, 'html.parser')
  
-# displaying the title
-#print("Title of the website is : ")
-title_from_url = ""
-for title in soup.find_all('title'):
-    #print(title.get_text())
-    title_from_url = title_from_url + title.get_text() + '\n'
+    # displaying the title
+    #print("Title of the website is : ")
+    title_from_url = ""
+    for title in soup.find_all('title'):
+        #print(title.get_text())
+        title_from_url = title_from_url + title.get_text() + '\n'
 
-# fetch description
-metas = soup.find_all('meta') #Get Meta Description
-for m in metas:
-    if m.get ('name') == 'description':
-        text_meta_description = m.get('content')
-        #print(text_meta_description)
-        
+    # fetch description
+    metas = soup.find_all('meta') #Get Meta Description
+    for m in metas:
+        if m.get ('name') == 'description':
+            text_meta_description = m.get('content')
+            #print(text_meta_description)
+            
 
-# fetch site domain
-text_domain = urlparse(text_link).netloc
-#print(text_domain)
+    # fetch site domain
+    text_domain = urlparse(text_link).netloc
+    #print(text_domain)
 
-# open image
-img = Image.open(template_image)
+    # open image
+    img = Image.open(template_image)
 
-def wraptext(input_text,wrap_width):
-    wrapper = textwrap.TextWrapper(width=wrap_width) 
-    word_list = wrapper.wrap(text=input_text) 
-    caption_new = ''
-    for ii in word_list[:-1]:
-        caption_new = caption_new + ii + '\n'
-    caption_new += word_list[-1]
-    return caption_new
+    def wraptext(input_text,wrap_width):
+        wrapper = textwrap.TextWrapper(width=wrap_width) 
+        word_list = wrapper.wrap(text=input_text) 
+        caption_new = ''
+        for ii in word_list[:-1]:
+            caption_new = caption_new + ii + '\n'
+        caption_new += word_list[-1]
+        return caption_new
 
-# wrap the texts
-text_title_wrapped = wraptext(title_from_url,25)
-text_domain_wrapped = wraptext(text_domain,80)
-text_link_wrapped = wraptext(text_link,80)
+    # wrap the texts
+    text_title_wrapped = wraptext(title_from_url,25)
+    text_domain_wrapped = wraptext(text_domain,80)
+    text_link_wrapped = wraptext(text_link,80)
 
 
-# draw image object
-I1 = ImageDraw.Draw(img)
+    # draw image object
+    I1 = ImageDraw.Draw(img)
 
-# add text to image
-## domain name
-I1.text((border_left, 300), text_domain_wrapped, font=font_site, fill=(0, 0, 0))
-## Post Title
-I1.text((border_left, 380), text_title_wrapped, font=font_title, fill=(0, 0, 0))
+    # add text to image
+    ## domain name
+    I1.text((border_left, 300), text_domain_wrapped, font=font_site, fill=(0, 0, 0))
+    ## Post Title
+    I1.text((border_left, 380), text_title_wrapped, font=font_title, fill=(0, 0, 0))
 
-## Post description
-if len(text_meta_description) > 1:
-    text_meta_description_wrapped = wraptext(text_meta_description,60)
-    I1.text((border_left, 700), text_meta_description_wrapped, font=font_site, fill=(0, 0, 0))
-## link
-I1.text((border_left, 900), text_link_wrapped, font=font_link, fill=(0, 0, 0))
+    ## Post description
+    if len(text_meta_description) > 1:
+        text_meta_description_wrapped = wraptext(text_meta_description,60)
+        I1.text((border_left, 700), text_meta_description_wrapped, font=font_site, fill=(0, 0, 0))
+    ## link
+    I1.text((border_left, 900), text_link_wrapped, font=font_link, fill=(0, 0, 0))
 
-## add logo
-# image_logo = Image.open(logo_image)
-# img.paste(image_logo,(0,0),image_logo)
-# save image
-img.save(target_image)
+    ## add logo
+    # image_logo = Image.open(logo_image)
+    # img.paste(image_logo,(0,0),image_logo)
+    # save image
+    img.save(target_image)
 
-# output for posting
-print("\n" + title_from_url)
-print("\n" + text_meta_description)
-print("\n" + text_link)
-print("\n" + text_domain)
-print("\nFollow @techbeatly for learning")
-print("\n#learning #devops #techbeatly\n")
+    # output for posting
+    print("\n" + title_from_url)
+    print("\n" + text_meta_description)
+    print("\n" + text_link)
+    print("\n" + text_domain)
+    print("\nFollow @techbeatly for learning")
+    print("\n#learning #devops #techbeatly\n")
+except:
+  print("Invalid URL or site reachable!")    
