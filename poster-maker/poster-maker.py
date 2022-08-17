@@ -21,6 +21,7 @@ from bs4 import BeautifulSoup
 import random
 
 border_left = 120
+starting_point = 120
 template_image_list = ['poster-template-1.png', 'poster-template-2.png','poster-template-3.png','poster-template-4.png','poster-template-5.png','poster-template-6.png','poster-template-7.png','poster-template-8.png']
 #template_image = 'images/poster-template-3.png'
 template_image = 'images/' + random.choice(template_image_list)
@@ -38,6 +39,15 @@ font_link = ImageFont.truetype('fonts/Figtree-Regular.ttf',size=24)
 
 # text_title = 'Obama warns far-left candidates says average American does not want to tear down the system'
 text_link = 'https://developers.redhat.com/articles/2022/08/01/containerize-net-applications-without-writing-dockerfiles?sc_cid=7013a000002i7tiAAA'
+
+def wraptext(input_text,wrap_width):
+    wrapper = textwrap.TextWrapper(width=wrap_width) 
+    word_list = wrapper.wrap(text=input_text) 
+    caption_new = ''
+    for ii in word_list[:-1]:
+        caption_new = caption_new + ii + '\n'
+    caption_new += word_list[-1]
+    return caption_new
 
 if len(sys.argv)>1:
     text_link = sys.argv[1]
@@ -78,15 +88,6 @@ try:
     # open image
     img = Image.open(template_image)
 
-    def wraptext(input_text,wrap_width):
-        wrapper = textwrap.TextWrapper(width=wrap_width) 
-        word_list = wrapper.wrap(text=input_text) 
-        caption_new = ''
-        for ii in word_list[:-1]:
-            caption_new = caption_new + ii + '\n'
-        caption_new += word_list[-1]
-        return caption_new
-
     # wrap the texts
     text_title_wrapped = wraptext(title_from_url,25)
     text_domain_wrapped = wraptext(text_domain,80)
@@ -98,16 +99,24 @@ try:
 
     # add text to image
     ## domain name
-    I1.text((border_left, 300), text_domain_wrapped, font=font_site, fill=(0, 0, 0))
+    text_y = starting_point + 50
+    I1.text((border_left,text_y), text_domain_wrapped, font=font_site, fill=(0, 0, 0))
     ## Post Title
-    I1.text((border_left, 380), text_title_wrapped, font=font_title, fill=(0, 0, 0))
+    text_y = text_y + 80
+    I1.text((border_left, text_y), text_title_wrapped, font=font_title, fill=(0, 0, 0))
+
+    # add the height for title x number of lines
+    text_title_wrapped_line_height = 70 * len(text_title_wrapped.splitlines())
 
     ## Post description
     if len(text_meta_description) > 1:
+        text_y = text_y + text_title_wrapped_line_height + 50
         text_meta_description_wrapped = wraptext(text_meta_description,60)
-        I1.text((border_left, 700), text_meta_description_wrapped, font=font_site, fill=(0, 0, 0))
+        I1.text((border_left, text_y), text_meta_description_wrapped, font=font_site, fill=(0, 0, 0))
+
     ## link
-    I1.text((border_left, 900), text_link_wrapped, font=font_link, fill=(0, 0, 0))
+    text_y = text_y + text_title_wrapped_line_height + 50
+    I1.text((border_left, text_y), text_link_wrapped, font=font_link, fill=(0, 0, 0))
 
     ## add logo
     # image_logo = Image.open(logo_image)
