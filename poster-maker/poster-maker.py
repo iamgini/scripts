@@ -109,13 +109,20 @@ try:
     text_title_wrapped_line_height = 70 * len(text_title_wrapped.splitlines())
 
     ## Post description
-    if len(text_meta_description) > 1:
+    # print(len(text_meta_description))
+    if len(text_meta_description) > 10:
         text_y = text_y + text_title_wrapped_line_height + 50
         text_meta_description_wrapped = wraptext(text_meta_description,60)
         I1.text((border_left, text_y), text_meta_description_wrapped, font=font_site, fill=(0, 0, 0))
-
-    ## link
-    text_y = text_y + text_title_wrapped_line_height + 50
+        
+        # calculate size and height of description text
+        text_meta_description_wrapped_line_height = 30 * len(text_meta_description_wrapped.splitlines())
+    else:
+        text_meta_description_wrapped_line_height = 0
+        text_y = text_y + text_title_wrapped_line_height + 50
+    
+    ## add URL text
+    text_y = text_y + text_meta_description_wrapped_line_height + 50
     I1.text((border_left, text_y), text_link_wrapped, font=font_link, fill=(0, 0, 0))
 
     ## add logo
