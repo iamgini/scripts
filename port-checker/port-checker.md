@@ -1,6 +1,6 @@
 ## Port Checker 
 
-A simple script to verify the prereq ports are opened between nodes.
+A simple script to verify the required ports are opened between nodes before the deployment of multi-component/multi-node software stacks.
 
 ## Sample CSV
 
@@ -19,4 +19,5 @@ Note: Remember to add a new line at the end of file.
 
 - Target nodes (source and destination) are able to access from the localhost over SSH without password.
 - The `remote_user` has sudo access on target nodes without password.
+- The `nc` utility is available on both source and destination nodes.
 

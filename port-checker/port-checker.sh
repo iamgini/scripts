@@ -10,7 +10,7 @@ function port_check {
   # COMMAND_STRING="sleep 10 &>/dev/null &"
   # echo "$COMMAND_STRING"
   # ssh $remote_user@$2 "hostname -f"
-  echo "Listening port >> $2:$3"
+  echo "Enable listening port on $2:$3"
   ssh $remote_user@$2 $COMMAND_STRING
   sleep 2
 
@@ -30,25 +30,31 @@ function port_check {
 
 OLDIFS=$IFS
 IFS=','
-[ ! -f $INPUT ] && { echo "$INPUT file not found"; exit 99; }
-while read entry_source entry_destination entry_port
-do
-  echo "$entry_source"
-  echo "Checking: $entry_source -> $entry_destination : $entry_port"
+# [ ! -f $INPUT ] && { echo "$INPUT file not found"; exit 99; }
+# while read entry_source entry_destination entry_port
+# do
+while IFS=, read -r entry_source entry_destination entry_port; do 
+
+
+  entry_destination=$(tr -d ' ' <<< "$entry_destination")
+  entry_port=$(tr -d ' ' <<< "$entry_port")
+  # echo "Target: $entry_destination"
+  printf "\n========= $entry_source -> $entry_destination:$entry_port =========\n"
   # call the function to check
   # port_check $entry_source $entry_destination $entry_port
 
   COMMAND_STRING="sudo nc -l $entry_port &>/dev/null &"
   # COMMAND_STRING="sleep 10 &>/dev/null &"
   echo "$COMMAND_STRING"
-  # ssh $remote_user@$2 "hostname -f"
+  ssh $remote_user@$entry_destination "hostname -f" < /dev/null
   echo "Listening port >> $entry_destination:$entry_port"
-  ssh $remote_user@$entry_destination $COMMAND_STRING
-  sleep 2
+  ssh $remote_user@$entry_destination $COMMAND_STRING < /dev/null
+  sleep 3
 
   # connect from local machine to test port
-  nc -v $entry_destination $entry_port & 
-  echo "hhhh" 
+  # nc -v -z $entry_destination $entry_port > port-checker.log  2>&1 
+  nc -v -z $entry_destination $entry_port < /dev/null
+  echo "finished" 
 
   # if [ "$entry_source" == "" ] || [ "$entry_destination" == "" ] || [ "$entry_port" == "" ]
 	# then
