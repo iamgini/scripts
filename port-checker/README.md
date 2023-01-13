@@ -20,8 +20,9 @@ Example CSV file without header.
 
 ```csv
 $ cat port-checker-data.csv
-localhost,192.168.57.145,80
-192.168.57.140,192.168.57.145,443
+server101, server201, 80,
+server101, server201, 443,
+server101, server201, 8080,
 
 ```
 
@@ -40,28 +41,29 @@ There is no parameter to pass as the source filename `port-checker-data.csv` (li
 ```shell
 $  ./port-checker.sh 
 
-========= server101 -> server201:80 =========
-Enable listening port server201:80
-Starting check from server101 on 80: nc -v -z server201 80 2>&1
+server101 -> server201:80.
+Step 1: Enable listening port server201:80: sudo nc -l 80 &>/dev/null &
+Step 2: Starting check from server101: nc -v -z server201 80 2>&1
 Ncat: Version 7.70 ( https://nmap.org/ncat )
 Ncat: Connected to 192.168.57.145:80.
-Ncat: 0 bytes sent, 0 bytes received in 0.02 seconds.
-finished
+Ncat: 0 bytes sent  0 bytes received in 0.03 seconds.
+Result: Success.
 
-========= server101 -> server201:443 =========
-Enable listening port server201:443
-Starting check from server101 on 443: nc -v -z server201 443 2>&1
+server101 -> server201:443.
+Step 1: Enable listening port server201:443: sudo nc -l 443 &>/dev/null &
+Step 2: Starting check from server101: nc -v -z server201 443 2>&1
 Ncat: Version 7.70 ( https://nmap.org/ncat )
 Ncat: Connected to 192.168.57.145:443.
-Ncat: 0 bytes sent, 0 bytes received in 0.02 seconds.
-finished
+Ncat: 0 bytes sent  0 bytes received in 0.03 seconds.
+Result: Success.
 
-========= server101 -> server201:8080 =========
-Enable listening port server201:8080
-Starting check from server101 on 8080: nc -v -z server201 8080 2>&1
+server101 -> server201:8080.
+Step 1: Enable listening port server201:8080: sudo nc -l 8080 &>/dev/null &
+Step 2: Starting check from server101: nc -v -z server201 8080 2>&1
 Ncat: Version 7.70 ( https://nmap.org/ncat )
-Ncat: No route to host.
-finished
+Ncat: Connected to 192.168.57.145:8080.
+Ncat: 0 bytes sent  0 bytes received in 0.03 seconds.
+Result: Success.
 ```
 
 From the above output,
