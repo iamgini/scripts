@@ -18,7 +18,7 @@ Source,Destination,Port
 ```
 Example CSV file without header.
 
-```csv
+```
 $ cat port-checker-data.csv
 server101, server201, 80,
 server101, server201, 443,
