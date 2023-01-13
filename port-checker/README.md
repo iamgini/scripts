@@ -69,3 +69,7 @@ From the above output,
 - `server101 -> server201:80` - is successful
 - `server101 -> server201:443` - is successful
 - `server101 -> server201:8080` - is failed; either `8080` is not open or firewall is blocking the port.
+
+Sample output color on result.
+
+![Output](images/port-check-color-output.png)
