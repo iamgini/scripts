@@ -61,9 +61,8 @@ server101 -> server201:8080.
 Step 1: Enable listening port server201:8080: sudo nc -l 8080 &>/dev/null &
 Step 2: Starting check from server101: nc -v -z server201 8080 2>&1
 Ncat: Version 7.70 ( https://nmap.org/ncat )
-Ncat: Connected to 192.168.57.145:8080.
-Ncat: 0 bytes sent  0 bytes received in 0.03 seconds.
-Result: Success.
+Ncat: No route to host.
+Result: Failed connection (Message: No route to host).
 ```
 
 From the above output,
