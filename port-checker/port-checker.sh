@@ -51,7 +51,8 @@ while IFS=, read -r entry_source entry_destination entry_port; do
   entry_destination=$(tr -d ' ' <<< "$entry_destination")
   entry_port=$(tr -d ' ' <<< "$entry_port")
   # echo "Target: $entry_destination"
-  printf "\n========= $entry_source -> $entry_destination:$entry_port =========\n"
+  # printf "\n========= $entry_source -> $entry_destination:$entry_port =========\n"
+  printf "\n${ColorC}$entry_source -> $entry_destination:$entry_port${ColorN}.\n"
   # call the function to check
   port_check $entry_source $entry_destination $entry_port
 
