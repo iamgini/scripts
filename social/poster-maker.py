@@ -23,10 +23,13 @@ import random
 
 border_left = 120
 starting_point = 120
-template_image_list = ['poster-template-1', 'poster-template-2','poster-template-3','poster-template-4','poster-template-5','poster-template-6','poster-template-7','poster-template-8']
+# template_image_list = ['poster-template-1', 'poster-template-2','poster-template-3','poster-template-4','poster-template-5','poster-template-6','poster-template-7','poster-template-8']
+template_image_list = ['poster-template-1', 'poster-template-2','poster-template-3']
 #template_image = 'images/poster-template-3.png'
 template_image = 'images/' + random.choice(template_image_list) + ".png"
+
 target_image = '/home/gmadappa/Downloads/poster-output-image.png'
+target_image = './poster-output-image.png'
 # logo_image = 'images/techbeatly-logo-v4.1-black.png'
 
 
