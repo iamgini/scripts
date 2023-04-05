@@ -1,6 +1,7 @@
 import os
 import json
 import requests
+from six.moves import urllib
 
 # Replace the variables with your own values
 # LINKEDIN_ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
@@ -10,10 +11,12 @@ LINKEDIN_API_URL = "https://api.linkedin.com/v2/posts"
 LINKEDIN_API_URL_MEMBER = "https://api.linkedin.com/v2/me"
 LINKEDIN_MEDIA_UPLOAD_API_URL = "https://api.linkedin.com/v2/images?action=initializeUpload"
 
+linkedin_company_name = "techbeatly"
 
-def upload_image_to_linkedin(image_path):
+def upload_image_to_linkedin(image_path, LINKEDIN_MEMBER_ID):
+   
+    print("Initialize Image Upload")
     
-    # Initialize Image Upload
     API_URL = 'https://api.linkedin.com/rest/images?action=initializeUpload'
     """
     Uploads an image to LinkedIn and returns the URL of the uploaded image.
@@ -21,7 +24,8 @@ def upload_image_to_linkedin(image_path):
     headers = {
         "Authorization": f"Bearer {LINKEDIN_ACCESS_TOKEN}",
         "Content-Type": "application/json",
-        "X-Restli-Protocol-Version": "2.0.0"
+        "X-Restli-Protocol-Version": "2.0.0",
+        "LinkedIn-Version": "202303"
     }
     data = json.dumps({
         "initializeUploadRequest": {
@@ -34,6 +38,7 @@ def upload_image_to_linkedin(image_path):
             headers=headers,
             data=data
         )
+        print(response)
         if response.status_code != 201:
             print(f"Error uploading image to LinkedIn: {response.json()}")
             return None
@@ -62,7 +67,29 @@ def get_linkedin_member_id():
         print(f"Retrieved LinkedIn member ID: {member_id}")
         return member_id
 
-        
+def get_linkedin_company_id():
+    """
+    Retrieves the Company ID
+    """
+    API_URL = "https://api.linkedin.com/v2/organizations?q=companies&keywords=" + urllib.parse.quote(linkedin_company_name)
+       
+    headers = {
+        "Authorization": f"Bearer {LINKEDIN_ACCESS_TOKEN}",
+        "Content-Type": "application/json",
+    }
+    response = requests.get(
+        API_URL,
+        headers=headers
+    )
+    if response.status_code != 200:
+        print(f"Error retrieving LinkedIn Company ID: {response.json()}")
+        return None
+    else:
+        company_id = response.json().get("id")
+        print(f"Retrieved LinkedIn Company ID: {company_id}")
+        return company_id
+
+                  
 def create_post(content):
     # Get the member ID
     LINKEDIN_MEMBER_ID = get_linkedin_member_id()
@@ -121,7 +148,7 @@ def create_post_with_image(image_path, caption):
     # Get the member ID
     LINKEDIN_MEMBER_ID = get_linkedin_member_id()
 
-    image_url = upload_image_to_linkedin(image_path)
+    image_url = upload_image_to_linkedin(image_path, LINKEDIN_MEMBER_ID)
     if not image_url:
         return
     
@@ -167,12 +194,13 @@ def create_post_with_image(image_path, caption):
         print("Posted on LinkedIn successfully!")
 
 if __name__ == '__main__':
-    content = "Here's a post on LinkedIn using the API!"
-    create_post(content)
+    # get_linkedin_company_id()
+    # content = "Here's a post on LinkedIn using the API!"
+    # create_post(content)
 
-    # image_path = "poster-output-image.png"
-    # caption = "Here's a post with an image on LinkedIn using the API!"
-    # create_post_with_image(image_path, caption)
+    image_path = "poster-output-image.png"
+    caption = "Here's a post with an image on LinkedIn using the API!"
+    create_post_with_image(image_path, caption)
 
 
 
