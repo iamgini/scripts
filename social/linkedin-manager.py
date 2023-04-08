@@ -16,8 +16,8 @@ linkedin_company_name = "techbeatly"
 def upload_image_to_linkedin(image_path, LINKEDIN_MEMBER_ID):
    
     print("Initialize Image Upload")
-    
-    API_URL = 'https://api.linkedin.com/rest/images?action=initializeUpload'
+
+    API_URL = 'https://api.linkedin.com/v2/images?action=initializeUpload'
     """
     Uploads an image to LinkedIn and returns the URL of the uploaded image.
     """
@@ -29,23 +29,23 @@ def upload_image_to_linkedin(image_path, LINKEDIN_MEMBER_ID):
     }
     data = json.dumps({
         "initializeUploadRequest": {
-            "owner": "urn:li:person:{LINKEDIN_MEMBER_ID}"
+            "owner": "urn:li:member:{LINKEDIN_MEMBER_ID}"
         }
     })
-    with open(image_path, 'rb') as image_file:
-        response = requests.post(
-            API_URL,
-            headers=headers,
-            data=data
-        )
-        print(response)
-        if response.status_code != 201:
-            print(f"Error uploading image to LinkedIn: {response.json()}")
-            return None
-        else:
-            image_url = response.headers.get('location')
-            print(image_url)
-            return image_url
+    # with open(image_path, 'rb') as image_file:
+    response = requests.post(
+        API_URL,
+        headers=headers,
+        data=data
+    )
+    print(response)
+    if response.status_code != 201:
+        print(f"Error uploading image to LinkedIn: {response.json()}")
+        return None
+    else:
+        image_url = response.headers.get('location')
+        print(image_url)
+        return image_url
 
 def get_linkedin_member_id():
     """
@@ -102,6 +102,8 @@ def create_post(content):
         "Content-Type": "application/json",
     }
     # "lifecycleState": "PUBLISHED",
+
+    ## working copy
     data = json.dumps({
         "author": f"urn:li:person:{LINKEDIN_MEMBER_ID}",
         "lifecycleState": "DRAFT",
@@ -112,10 +114,9 @@ def create_post(content):
           "targetEntities": [],
           "thirdPartyDistributionChannels": []
         },
-        "isReshareDisabledByAuthor": False
-       
-
+        "isReshareDisabledByAuthor": False      
     })
+
     # data = json.dumps({
     #     "author": f"urn:li:person:{LINKEDIN_MEMBER_ID}",
     #     "lifecycleState": "DRAFT",
@@ -133,7 +134,8 @@ def create_post(content):
     # })    
         # "visibility": {
         #     "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"
-        # }        
+        # }      
+    
     response = requests.post(
         LINKEDIN_API_URL,
         headers=headers,
@@ -194,10 +196,12 @@ def create_post_with_image(image_path, caption):
         print("Posted on LinkedIn successfully!")
 
 if __name__ == '__main__':
+    image_url = 'https://www.techbeatly.com/wp-content/uploads/2023/04/openshift-compliance-operator.png'
     # get_linkedin_company_id()
-    # content = "Here's a post on LinkedIn using the API!"
+    content = "Here's a post on LinkedIn using the Python and API!"
     # create_post(content)
 
+    
     image_path = "poster-output-image.png"
     caption = "Here's a post with an image on LinkedIn using the API!"
     create_post_with_image(image_path, caption)
