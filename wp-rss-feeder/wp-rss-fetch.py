@@ -4,13 +4,20 @@ import string
 from bs4 import BeautifulSoup
 import os
 
+# color text
+import colorama
+from colorama import Fore
+from colorama import init
+init(autoreset=True)
+
 my_author_name = 'Gineesh Madapparambath'
 my_author_name_short = 'gini'
 # blog_git_location = '/Users/gini/codes/ginigangadharan.github.io/_posts/'
 blog_git_location = os.path.expanduser('~') + '/workarea/ginigangadharan.github.io/_posts/'
-
+wp_author_atom_feed = "https://www.techbeatly.com/author/" + my_author_name_short + "/feed/atom/"
 #rss_feed_url = 'https://www.techbeatly.com/feed/atom/?paged=3'
 #rss_feed_url = 'https://www.techbeatly.com/feed/atom/?paged=10'
+# 
 
 article_category_max_count = 3
 entry_update_count = 0
@@ -21,19 +28,23 @@ article_featured = 'false'
 #print(entry)
 
 rss_feed_page_counter = 1
-rss_feed_url = 'https://www.techbeatly.com/feed/atom/?paged=' + str(rss_feed_page_counter)
+rss_feed_url = wp_author_atom_feed + '?paged=' + str(rss_feed_page_counter)
+# https://www.techbeatly.com/author/gini/feed/atom/?paged=2
+
 NewsFeed = feedparser.parse(rss_feed_url)
 print('Number of RSS posts :', len(NewsFeed.entries))
 
 while len(NewsFeed.entries) > 0:
-#while rss_feed_page_counter == 1:
+# while rss_feed_page_counter == 1:
 #if len(NewsFeed.entries) > 0:
   for entry in NewsFeed.entries:
     article_featured = 'false'
 
     ## check if this author story, then take it
     if entry.author == my_author_name:
-      print('Updating: (',rss_feed_page_counter,')',entry.published[0:10], entry.title)
+      print(Fore.RED + 'Updating: (' + str(rss_feed_page_counter) + ') ' + entry.published[0:10] + ": " +  entry.title)
+      # print(Fore.RED, 'Updating: (Batch:',rss_feed_page_counter,')',entry.published[0:10], entry.title)
+      
       entry_update_count = entry_update_count + 1
       article_title = entry.title
       title_cleaned = article_title.translate(str.maketrans('', '', string.punctuation))
@@ -102,11 +113,12 @@ while len(NewsFeed.entries) > 0:
       new_blog.close()
     else:
       #print('Skipping\t:', entry.title)
-      print('Skipping: (',rss_feed_page_counter,')',entry.published[0:10], entry.title)
+      print('Skipping: (' +  str(rss_feed_page_counter) + ') ' + entry.published[0:10] + ": " + entry.title)
 
   rss_feed_page_counter = rss_feed_page_counter + 1
-  rss_feed_url = 'https://www.techbeatly.com/feed/atom/?paged=' + str(rss_feed_page_counter)
-  #rss_feed_url = 'https://www.techbeatly.com/feed/atom/?paged=10'
+  # rss_feed_url = 'https://www.techbeatly.com/feed/atom/?paged=' + str(rss_feed_page_counter)
+  rss_feed_url = wp_author_atom_feed + '?paged=' + str(rss_feed_page_counter)
+ 
   NewsFeed = feedparser.parse(rss_feed_url)
   print('Number of RSS posts :', len(NewsFeed.entries))
 
