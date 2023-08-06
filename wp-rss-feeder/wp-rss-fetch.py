@@ -13,7 +13,7 @@ init(autoreset=True)
 my_author_name = 'Gineesh Madapparambath'
 my_author_name_short = 'gini'
 # blog_git_location = '/Users/gini/codes/ginigangadharan.github.io/_posts/'
-blog_git_location = os.path.expanduser('~') + '/workarea/ginigangadharan.github.io/_posts/'
+blog_git_location = os.path.expanduser('~') + '/workarea/iamgini/_posts/'
 wp_author_atom_feed = "https://www.techbeatly.com/author/" + my_author_name_short + "/feed/atom/"
 #rss_feed_url = 'https://www.techbeatly.com/feed/atom/?paged=3'
 #rss_feed_url = 'https://www.techbeatly.com/feed/atom/?paged=10'
@@ -46,9 +46,10 @@ while len(NewsFeed.entries) > 0:
       # print(Fore.RED, 'Updating: (Batch:',rss_feed_page_counter,')',entry.published[0:10], entry.title)
       
       entry_update_count = entry_update_count + 1
-      article_title = entry.title
+      article_title = entry.title.replace('  ',' ') 
       title_cleaned = article_title.translate(str.maketrans('', '', string.punctuation))
-      title_cleaned = title_cleaned.replace('  ',' ')
+      # title_cleaned = title_cleaned.replace('  ',' ')      
+      
 
       article_author = my_author_name_short
   
