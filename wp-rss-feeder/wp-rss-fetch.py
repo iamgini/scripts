@@ -9,7 +9,7 @@ import re
 
 # color text
 import colorama
-from colorama import Fore
+from colorama import Fore, Style
 from colorama import init
 init(autoreset=True)
 
@@ -45,7 +45,7 @@ while len(NewsFeed.entries) > 0:
 
     ## check if this author story, then take it
     if entry.author == my_author_name:
-      print(Fore.RED + 'Updating: (' + str(rss_feed_page_counter) + ') ' + entry.published[0:10] + ": " +  entry.title)
+      print(Fore.GREEN + 'Batch ' + str(rss_feed_page_counter) + '::' + 'Updating::' + entry.published[0:10] + Fore.RED + "::" +  entry.title)
       # print(Fore.RED, 'Updating: (Batch:',rss_feed_page_counter,')',entry.published[0:10], entry.title)
       
       entry_update_count = entry_update_count + 1
@@ -55,11 +55,13 @@ while len(NewsFeed.entries) > 0:
       title_cleaned = title_cleaned.replace('“', '-')
       title_cleaned = title_cleaned.replace('”', '-')
       title_cleaned = title_cleaned.replace("'", '-')
-      # title_cleaned = re.sub(r'[^\w\s]', '', title_cleaned)
+      title_cleaned = "\"" + title_cleaned + "\""
+
+      
       # print(entry.title)
       # print(html.unescape(entry.title))
-      print("  Title: " + title_cleaned)
-      # title_cleaned = title_cleaned.replace('  ',' ')
+      print(Fore.BLUE + '  Title  : ' + Fore.RESET +  title_cleaned)
+
       
       article_published_date_for_file = entry.published[0:10]
       # Clean the title for file name
@@ -67,7 +69,7 @@ while len(NewsFeed.entries) > 0:
       article_new_blog_file = re.sub(r'[^\w\s]', '', article_new_blog_file)
       article_new_blog_file = article_new_blog_file.replace(' ','-')
       article_new_blog_file = article_new_blog_file.replace('--','-')
-      print("  File: " + article_published_date_for_file + '-' + article_new_blog_file + '.md')
+      print(Fore.BLUE + "  File   : " + Fore.RESET + article_published_date_for_file + '-' + article_new_blog_file + '.md')
 
       article_author = my_author_name_short
   
@@ -90,22 +92,29 @@ while len(NewsFeed.entries) > 0:
       #  article_categories = article_tags   
       article_external_url = entry.link
       article_published_date = entry.published
-      article_summary = entry.summary
+
+      article_summary_raw = BeautifulSoup(entry.summary, 'html.parser')
+      article_summary = article_summary_raw.find('p').get_text()
+      # print("Summary: " + article_summary)
       
       ## fetching image
       article_content = BeautifulSoup(entry.content[0].value, 'html.parser')
       #print('\n\n\n\n\n\n', article_content)
       images = article_content.find_all('img', src=True)
       #print('Number of Images: ', len(images))
-      #for image in images:
+      # for image in images:
       #  print(image)
       # select src tag
       image_src = [x['src'] for x in images]
-      #print(image_src[0])
+      # print(image_src[0])
+
       try:
         article_image = image_src[0]
+        print(Fore.BLUE + "  Image  : " + Fore.RESET + article_image)
       except:
         article_image = ''
+        print(Fore.BLUE + "  Image  : " + Fore.RESET + article_image)
+      
       #for image in image_src:
        # print(image)
 
@@ -118,11 +127,11 @@ while len(NewsFeed.entries) > 0:
                                           article_image = article_image,
                                           article_tags = article_tags,
                                           article_external_url= article_external_url,
-                                          article_summary = entry.summary,
+                                          article_summary = article_summary,
                                           article_published_date = article_published_date,
                                           article_featured = article_featured
                                         )
-      #print(templated_output)    
+      # print(templated_output)    
       
       new_blog = open(blog_git_location + article_published_date_for_file + '-' + article_new_blog_file + '.md', "w")
       new_blog.write(templated_output)
@@ -138,4 +147,4 @@ while len(NewsFeed.entries) > 0:
   NewsFeed = feedparser.parse(rss_feed_url)
   print('Number of RSS posts :', len(NewsFeed.entries))
 
-print('Totoal entries updated: ', entry_update_count)
+print('Total entries updated: ', entry_update_count)
