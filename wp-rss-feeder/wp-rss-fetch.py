@@ -4,6 +4,9 @@ import string
 from bs4 import BeautifulSoup
 import os
 
+import html
+import re
+
 # color text
 import colorama
 from colorama import Fore
@@ -47,9 +50,24 @@ while len(NewsFeed.entries) > 0:
       
       entry_update_count = entry_update_count + 1
       article_title = entry.title.replace('  ',' ') 
-      title_cleaned = article_title.translate(str.maketrans('', '', string.punctuation))
-      # title_cleaned = title_cleaned.replace('  ',' ')      
+      # title_cleaned = article_title.translate(str.maketrans('', '', string.punctuation))
+      title_cleaned = html.unescape(entry.title)
+      title_cleaned = title_cleaned.replace('“', '-')
+      title_cleaned = title_cleaned.replace('”', '-')
+      title_cleaned = title_cleaned.replace("'", '-')
+      # title_cleaned = re.sub(r'[^\w\s]', '', title_cleaned)
+      # print(entry.title)
+      # print(html.unescape(entry.title))
+      print("  Title: " + title_cleaned)
+      # title_cleaned = title_cleaned.replace('  ',' ')
       
+      article_published_date_for_file = entry.published[0:10]
+      # Clean the title for file name
+      article_new_blog_file = html.unescape(entry.title)
+      article_new_blog_file = re.sub(r'[^\w\s]', '', article_new_blog_file)
+      article_new_blog_file = article_new_blog_file.replace(' ','-')
+      article_new_blog_file = article_new_blog_file.replace('--','-')
+      print("  File: " + article_published_date_for_file + '-' + article_new_blog_file + '.md')
 
       article_author = my_author_name_short
   
@@ -104,11 +122,8 @@ while len(NewsFeed.entries) > 0:
                                           article_published_date = article_published_date,
                                           article_featured = article_featured
                                         )
-      #print(templated_output)
+      #print(templated_output)    
       
-      article_new_blog_file = title_cleaned.replace(' ','-')
-      article_published_date_for_file = entry.published[0:10]
-  
       new_blog = open(blog_git_location + article_published_date_for_file + '-' + article_new_blog_file + '.md', "w")
       new_blog.write(templated_output)
       new_blog.close()
