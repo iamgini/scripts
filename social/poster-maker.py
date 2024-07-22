@@ -46,8 +46,8 @@ font_link = ImageFont.truetype('fonts/Figtree-Regular.ttf',size=24)
 
 # function to wrap the text
 def wraptext(input_text,wrap_width):
-    wrapper = textwrap.TextWrapper(width=wrap_width) 
-    word_list = wrapper.wrap(text=input_text) 
+    wrapper = textwrap.TextWrapper(width=wrap_width)
+    word_list = wrapper.wrap(text=input_text)
     caption_new = ''
     for ii in word_list[:-1]:
         caption_new = caption_new + ii + '\n'
@@ -74,9 +74,9 @@ def createPoster(url,template_number,output):
         template_image = 'images/poster-template-' + template_number + ".png"
     else:
         template_image = 'images/' + random.choice(template_image_list) + ".png"
-    
+
     # target_image = '/home/gmadappa/Downloads/poster-output-image.png'
-        
+
     # try:
     if text_link:
 
@@ -84,13 +84,18 @@ def createPoster(url,template_number,output):
         reqs = requests.get(text_link)
         # using the BeautifulSoup module
         soup = BeautifulSoup(reqs.text, 'html.parser')
-    
+
         # displaying the title
-        #print("Title of the website is : ")
-        title_from_url = ""
+        # print("Title of the website is : ")
+
+        titles_from_url = []
         for title in soup.find_all('title'):
-            #print(title.get_text())
-            title_from_url = title_from_url + title.get_text() + '\n'
+            # print(title.get_text())
+            # title_from_url = title_from_url + title.get_text() + '\n'
+            titles_from_url.append(title.get_text())
+
+        title_from_url = titles_from_url[0]
+
 
         # fetch description
         text_meta_description = ""
@@ -105,7 +110,7 @@ def createPoster(url,template_number,output):
         text_domain = urlparse(text_link).netloc
         #print(text_domain)
 
-        
+
         # open image
         img = Image.open(template_image)
 
@@ -122,9 +127,14 @@ def createPoster(url,template_number,output):
         ## domain name
         text_y = starting_point + 100
         I1.text((border_left,text_y), text_domain_wrapped, font=font_site, fill=(0, 0, 0))
+
         ## Post Title
         text_y = text_y + 100
         I1.text((border_left, text_y), text_title_wrapped, font=font_title, fill=(0, 0, 0))
+
+        # ## debug
+        # text_y = text_y + 100
+        # I1.text((border_left, text_y), 'debug', font=font_title, fill=(0, 0, 0))
 
         # add the height for title x number of lines
         text_title_wrapped_line_height = 70 * len(text_title_wrapped.splitlines())
@@ -135,13 +145,13 @@ def createPoster(url,template_number,output):
             text_y = text_y + text_title_wrapped_line_height + 50
             text_meta_description_wrapped = wraptext(text_meta_description,60)
             I1.text((border_left, text_y), text_meta_description_wrapped, font=font_site, fill=(0, 0, 0))
-            
+
             # calculate size and height of description text
             text_meta_description_wrapped_line_height = 30 * len(text_meta_description_wrapped.splitlines())
         else:
             text_meta_description_wrapped_line_height = 0
             text_y = text_y + text_title_wrapped_line_height + 50
-        
+
         ## add URL text
         text_y = text_y + text_meta_description_wrapped_line_height + 50
         I1.text((border_left, text_y), text_link_wrapped, font=font_link, fill=(0, 0, 0))
@@ -164,7 +174,7 @@ def createPoster(url,template_number,output):
         print("\n================================================================")
     # except Exception as e:
     #     print(e)
-    #     print("Invalid URL or site not reachable!")    
+    #     print("Invalid URL or site not reachable!")
 
 
 
@@ -173,14 +183,14 @@ def myfunc(argv):
     arg_output = ""
     arg_template = ""
     arg_help = "{0} -u <url> -t <background-template-number> -o <output-file>".format(argv[0])
-    
+
     try:
-        opts, args = getopt.getopt(argv[1:], "hu:t:o:", ["help", "url=", 
+        opts, args = getopt.getopt(argv[1:], "hu:t:o:", ["help", "url=",
         "template=", "output="])
         for opt, arg in opts:
             if opt in ("-h", "--help"):
                 # print the help message and exit
-                print(arg_help + str("hi"))  
+                print(arg_help + str("hi"))
                 sys.exit(2)
             elif opt in ("-u", "--url"):
                 arg_url = arg
@@ -192,8 +202,8 @@ def myfunc(argv):
             # print('url:', arg_url)
             # print('template:', arg_template)
             # print('output:', arg_output)
-                  
-            
+
+
             # call createPoster function with details
             createPoster(arg_url,arg_template,arg_output)
 
