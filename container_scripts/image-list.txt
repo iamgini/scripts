@@ -1,0 +1,4 @@
+registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel9@sha256:9b1f538af39b0918f81f8967919c5010a69500822f3f3ec0b66241522bad9dae
+registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel9@sha256:05217c756fc43a281489407f80d9bbacdbf0e8d7ee822acd50a5ae140d8a9d77
+registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel9@sha256:eea91b2943150a33bb67b09faf59d958deee5d87225f411790e402ed02f2ad0b
+registry.redhat.io/ansible-automation-platform-24/controller-rhel8@sha256:09344081c5683ba9fc644df620af72e71f3fc23c566f79b6ad98b5a759b822ee

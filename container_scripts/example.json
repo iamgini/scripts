@@ -1,0 +1,419 @@
+{
+  "_id": "66e25900681e29c2ae5882c8",
+  "architecture": "amd64",
+  "brew": {
+    "build": "ee-supported-container-1.0.0-787",
+    "completion_date": "2024-09-12T02:57:22.435000+00:00",
+    "nvra": "ee-supported-container-1.0.0-787.amd64",
+    "package": "ee-supported-container"
+  },
+  "certified": false,
+  "container_grades": {
+    "status": "completed",
+    "status_message": "This image does not have any unapplied Critical or Important security errata"
+  },
+  "content_sets": [
+    "ansible-automation-platform-2_DOT_4-for-rhel-9-x86_64-rpms",
+    "rhel-9-for-x86_64-baseos-rpms",
+    "rhel-9-for-x86_64-appstream-rpms",
+    "codeready-builder-for-rhel-9-x86_64-rpms",
+    "rhocp-4.12-for-rhel-9-x86_64-rpms"
+  ],
+  "cpe_ids": [
+    "cpe:/a:redhat:enterprise_linux:9::crb",
+    "cpe:/a:redhat:enterprise_linux:9::appstream",
+    "cpe:/a:redhat:openshift:4.12::el9",
+    "cpe:/o:redhat:enterprise_linux:9::baseos",
+    "cpe:/a:redhat:openshift_sandboxed_containers:1.4.0::el9"
+  ],
+  "creation_date": "2024-09-12T02:59:12.841000+00:00",
+  "docker_image_id": "sha256:5826f31f1ed49df9204f52c32c4041003abc3f8a79103400087eab1c0f5b2801",
+  "freshness_grades": [
+    {
+      "creation_date": "2024-09-19T13:15:29.733000+00:00",
+      "grade": "A",
+      "start_date": "2024-09-19T13:15:29.733000+00:00"
+    }
+  ],
+  "image_id": "sha256:9b1f538af39b0918f81f8967919c5010a69500822f3f3ec0b66241522bad9dae",
+  "last_update_date": "2024-09-19T13:15:31.238000+00:00",
+  "object_type": "containerImage",
+  "parsed_data": {
+    "architecture": "amd64",
+    "command": "['ansible-runner', 'run', '/runner']",
+    "comment": "FROM registry-proxy.engineering.redhat.com/rh-osbs/ansible-automation-platform-24-ee-minimal-rhel9@sha256:88c139988d96b912a7b79cc0e34b737c53d4362a972b5131f2419181066b232d",
+    "created": "2024-09-12T02:48:09.755441377Z",
+    "env_variables": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "HOME=/home/runner",
+      "DESCRIPTION=Red Hat Ansible Automation Platform Supported Execution Environment",
+      "container=oci"
+    ],
+    "labels": [
+      {
+        "name": "architecture",
+        "value": "x86_64"
+      },
+      {
+        "name": "build-date",
+        "value": "2024-09-12T02:34:09"
+      },
+      {
+        "name": "com.redhat.component",
+        "value": "ee-supported-container"
+      },
+      {
+        "name": "com.redhat.license_terms",
+        "value": "https://www.redhat.com/agreements"
+      },
+      {
+        "name": "description",
+        "value": "Red Hat Ansible Automation Platform Supported Execution Environment"
+      },
+      {
+        "name": "distribution-scope",
+        "value": "public"
+      },
+      {
+        "name": "io.buildah.version",
+        "value": "1.29.0"
+      },
+      {
+        "name": "io.k8s.description",
+        "value": "Red Hat Ansible Automation Platform Supported Execution Environment"
+      },
+      {
+        "name": "io.k8s.display-name",
+        "value": "ee-supported-rhel9"
+      },
+      {
+        "name": "io.openshift.expose-services",
+        "value": ""
+      },
+      {
+        "name": "io.openshift.tags",
+        "value": "automation,ansible"
+      },
+      {
+        "name": "maintainer",
+        "value": "Ansible Automation Platform Productization Team"
+      },
+      {
+        "name": "name",
+        "value": "ansible-automation-platform-24/ee-supported-rhel9"
+      },
+      {
+        "name": "release",
+        "value": "787"
+      },
+      {
+        "name": "summary",
+        "value": "Red Hat Ansible Automation Platform Supported Execution Environment"
+      },
+      {
+        "name": "url",
+        "value": "https://access.redhat.com/containers/#/registry.access.redhat.com/ansible-automation-platform-24/ee-supported-rhel9/images/1.0.0-787"
+      },
+      {
+        "name": "vcs-ref",
+        "value": "1b24672e8937648ed82b775ca47967c178836c16"
+      },
+      {
+        "name": "vcs-type",
+        "value": "git"
+      },
+      {
+        "name": "vendor",
+        "value": "Red Hat, Inc."
+      },
+      {
+        "name": "version",
+        "value": "1.0.0"
+      }
+    ],
+    "layers": [
+      "sha256:32998343eb008b1e029134b98dcc11d92f544542df15c38a1e1c36d0133144ab",
+      "sha256:26686d94371b3eb239a9599f9c9cc76e07a75e47728762c133a26c9740592e88",
+      "sha256:0412e7a83edb0eaee8302ce34696204ea3690887a4cdc75f0616f0fbea7f737c",
+      "sha256:0d4f239055d063750dddeb4ae84b23d0a708ce76be3167f93d2ba2ba70b50547"
+    ],
+    "os": "linux",
+    "ports": "[]",
+    "size": 0,
+    "uncompressed_layer_sizes": [
+      {
+        "layer_id": "sha256:4f5cf5b4e24a5b46faca69eb865c82dc97af557b532d883453fb09ac2593e0d7",
+        "size_bytes": 1176361984
+      },
+      {
+        "layer_id": "sha256:1e0a05fa94deec4da9af983c9291d5bd0efbddc0094f19e32412d29539fabccd",
+        "size_bytes": 137552896
+      },
+      {
+        "layer_id": "sha256:179472b59362268e67fd548b8086f73b5245281886e744f0e3741711a0c5f564",
+        "size_bytes": 64708096
+      },
+      {
+        "layer_id": "sha256:641ef8f59e8a4638d10d2bff29d8c3f960950b9bb371a734a9699b561e3c1714",
+        "size_bytes": 100917760
+      }
+    ],
+    "uncompressed_size_bytes": 1479540736
+  },
+  "raw_config": "{\"created\": \"2024-09-12T02:48:09.755441377Z\", \"architecture\": \"amd64\", \"os\": \"linux\", \"config\": {\"Env\": [\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\", \"HOME=/home/runner\", \"DESCRIPTION=Red Hat Ansible Automation Platform Supported Execution Environment\", \"container=oci\"], \"Entrypoint\": [\"entrypoint\"], \"Cmd\": [\"ansible-runner\", \"run\", \"/runner\"], \"Volumes\": {\"/runner\": {}}, \"WorkingDir\": \"/runner\", \"Labels\": {\"architecture\": \"x86_64\", \"build-date\": \"2024-09-12T02:34:09\", \"com.redhat.component\": \"ee-supported-container\", \"com.redhat.license_terms\": \"https://www.redhat.com/agreements\", \"description\": \"Red Hat Ansible Automation Platform Supported Execution Environment\", \"distribution-scope\": \"public\", \"io.buildah.version\": \"1.29.0\", \"io.k8s.description\": \"Red Hat Ansible Automation Platform Supported Execution Environment\", \"io.k8s.display-name\": \"ee-supported-rhel9\", \"io.openshift.expose-services\": \"\", \"io.openshift.tags\": \"automation,ansible\", \"maintainer\": \"Ansible Automation Platform Productization Team\", \"name\": \"ansible-automation-platform-24/ee-supported-rhel9\", \"release\": \"787\", \"summary\": \"Red Hat Ansible Automation Platform Supported Execution Environment\", \"url\": \"https://access.redhat.com/containers/#/registry.access.redhat.com/ansible-automation-platform-24/ee-supported-rhel9/images/1.0.0-787\", \"vcs-ref\": \"1b24672e8937648ed82b775ca47967c178836c16\", \"vcs-type\": \"git\", \"vendor\": \"Red Hat, Inc.\", \"version\": \"1.0.0\"}}, \"rootfs\": {\"type\": \"layers\", \"diff_ids\": [\"sha256:641ef8f59e8a4638d10d2bff29d8c3f960950b9bb371a734a9699b561e3c1714\", \"sha256:179472b59362268e67fd548b8086f73b5245281886e744f0e3741711a0c5f564\", \"sha256:1e0a05fa94deec4da9af983c9291d5bd0efbddc0094f19e32412d29539fabccd\", \"sha256:4f5cf5b4e24a5b46faca69eb865c82dc97af557b532d883453fb09ac2593e0d7\"]}, \"history\": [{\"created\": \"2024-09-09T02:59:59.365019301Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:b37317a01d7c138350a7dd1214596c9e331f2443e4202fb62e450e297a8884ec in / \", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.022037485Z\", \"created_by\": \"/bin/sh -c mv -f /etc/yum.repos.d/ubi.repo /tmp || :\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.259749089Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:5b1f650e1376d79fa3a65df4a154ea5166def95154b52c1c1097dfd8fc7d58eb in /tmp/tls-ca-bundle.pem \", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.529019119Z\", \"created_by\": \"/bin/sh -c #(nop) ADD multi:91888bb231f36a25c84f05db4d13197ea848b09abe661f7b153d55f6f6af43de in /etc/yum.repos.d/ \", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.529058637Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL maintainer=\\\"Red Hat, Inc.\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.529141549Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL com.redhat.component=\\\"ubi9-minimal-container\\\"       name=\\\"ubi9-minimal\\\"       version=\\\"9.4\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.529166913Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL com.redhat.license_terms=\\\"https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.52919543Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL summary=\\\"Provides the latest release of the minimal Red Hat Universal Base Image 9.\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.529273517Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL description=\\\"The Universal Base Image Minimal is a stripped down image that uses microdnf as a package manager. This base image is freely redistributable, but Red Hat only supports Red Hat technologies through subscriptions for Red Hat products. This image is maintained by Red Hat and updated regularly.\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.529307953Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL io.k8s.display-name=\\\"Red Hat Universal Base Image 9 Minimal\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.529328303Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL io.openshift.expose-services=\\\"\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.529348761Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL io.openshift.tags=\\\"minimal rhel9\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.52935987Z\", \"created_by\": \"/bin/sh -c #(nop) ENV container oci\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.529397287Z\", \"created_by\": \"/bin/sh -c #(nop) ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:00.529404455Z\", \"created_by\": \"/bin/sh -c #(nop) CMD [\\\"/bin/bash\\\"]\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:01.202960577Z\", \"created_by\": \"/bin/sh -c rm -rf /var/log/*\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:01.482405555Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:b7994b75b70a7a3dfcf6b1fce6d3be08fac202f008a87a5e9c4a46e3ba552516 in /root/buildinfo/content_manifests/ubi9-minimal-container-9.4-1227.1725849298.json \", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:01.739960142Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:42184a4eb8e0b654da33b3c8593adbf1bd40e95928a3bb35c340d1f9eb9affbd in /root/buildinfo/Dockerfile-ubi9-minimal-9.4-1227.1725849298 \", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:01.740136069Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL \\\"release\\\"=\\\"1227.1725849298\\\" \\\"distribution-scope\\\"=\\\"public\\\" \\\"vendor\\\"=\\\"Red Hat, Inc.\\\" \\\"build-date\\\"=\\\"2024-09-09T02:35:25\\\" \\\"architecture\\\"=\\\"x86_64\\\" \\\"vcs-type\\\"=\\\"git\\\" \\\"vcs-ref\\\"=\\\"94baa7760359088a42ad33dc22d329a5ee2c7209\\\" \\\"io.k8s.description\\\"=\\\"The Universal Base Image Minimal is a stripped down image that uses microdnf as a package manager. This base image is freely redistributable, but Red Hat only supports Red Hat technologies through subscriptions for Red Hat products. This image is maintained by Red Hat and updated regularly.\\\" \\\"url\\\"=\\\"https://access.redhat.com/containers/#/registry.access.redhat.com/ubi9-minimal/images/9.4-1227.1725849298\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:06.720169667Z\", \"created_by\": \"/bin/sh -c rm -f '/etc/yum.repos.d/odcs-3464206-199c4.repo' '/etc/yum.repos.d/rhel-9.4-compose-34ae9.repo'\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:12.849143133Z\", \"created_by\": \"/bin/sh -c rm -f /tmp/tls-ca-bundle.pem\", \"empty_layer\": true}, {\"created\": \"2024-09-09T03:00:14.251190156Z\", \"created_by\": \"/bin/sh -c mv -fZ /tmp/ubi.repo /etc/yum.repos.d/ubi.repo || :\"}, {\"created\": \"2024-09-12T01:25:35.719598256Z\", \"created_by\": \"/bin/sh -c mv -f /etc/yum.repos.d/ubi.repo /tmp || :\", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:25:35.966999788Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:5b1f650e1376d79fa3a65df4a154ea5166def95154b52c1c1097dfd8fc7d58eb in /tmp/tls-ca-bundle.pem \", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:25:36.295985427Z\", \"created_by\": \"/bin/sh -c #(nop) ADD multi:7968f960bc85d64403af83a702cb7a6c49617abce274010f47ece87e6ddd2791 in /etc/yum.repos.d/ \", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:26:01.042902542Z\", \"created_by\": \"/bin/sh -c microdnf update -y --nodocs --setopt install_weak_deps=0   && microdnf install -y --nodocs --setopt install_weak_deps=0 dumb-init glibc-langpack-en python3-pip python3-pip-wheel   && microdnf clean all   && rm -rf /var/cache/{dnf,yum}   && rm -rf /var/lib/dnf/history.*   && rm -rf /var/log/*\", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:26:01.042961454Z\", \"created_by\": \"/bin/sh -c #(nop) ENTRYPOINT [\\\"/usr/bin/dumb-init\\\", \\\"--\\\"]\", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:26:01.043079847Z\", \"created_by\": \"/bin/sh -c #(nop) ENV DESCRIPTION=\\\"Red Hat Ansible Automation Platform Python Execution Environment\\\"     container=oci\", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:26:01.043269439Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL com.redhat.component=\\\"ansible-python-base-container\\\"       name=\\\"ansible-automation-platform-24/ansible-python-base-rhel9\\\"       version=\\\"1.0.0\\\"       summary=\\\"${DESCRIPTION}\\\"       io.openshift.expose-services=\\\"\\\"       io.openshift.tags=\\\"automation,ansible\\\"       io.k8s.display-name=\\\"ansible-python-base-rhel9\\\"       maintainer=\\\"Ansible Automation Platform Productization Team\\\"       description=\\\"${DESCRIPTION}\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:26:01.043301332Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL release=620\", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:26:01.296958242Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:ec0794215bf5103893e6cece3ef05433d4d32f31b49850e8329cb739f6cb1ba2 in /root/buildinfo/content_manifests/ansible-python-base-container-1.0.0-620.json \", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:26:01.547086186Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:9f9b751ef181acca3baef88a7ca0dd34604d914983079f62696df3ae4046e889 in /root/buildinfo/Dockerfile-ansible-automation-platform-24-ansible-python-base-rhel9-1.0.0-620 \", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:26:01.547288231Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL \\\"com.redhat.license_terms\\\"=\\\"https://www.redhat.com/agreements\\\" \\\"distribution-scope\\\"=\\\"public\\\" \\\"vendor\\\"=\\\"Red Hat, Inc.\\\" \\\"build-date\\\"=\\\"2024-09-12T01:23:46\\\" \\\"architecture\\\"=\\\"x86_64\\\" \\\"vcs-type\\\"=\\\"git\\\" \\\"vcs-ref\\\"=\\\"fd95eedbfecd26bad6872fd03ef31c0fa4903e18\\\" \\\"io.k8s.description\\\"=\\\"Red Hat Ansible Automation Platform Python Execution Environment\\\" \\\"url\\\"=\\\"https://access.redhat.com/containers/#/registry.access.redhat.com/ansible-automation-platform-24/ansible-python-base-rhel9/images/1.0.0-620\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:26:02.205991105Z\", \"created_by\": \"/bin/sh -c rm -f '/etc/yum.repos.d/odcs-3477277-34677.repo' '/etc/yum.repos.d/odcs-3477748-51d38.repo'\", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:26:02.875319095Z\", \"created_by\": \"/bin/sh -c rm -f /tmp/tls-ca-bundle.pem\", \"empty_layer\": true}, {\"created\": \"2024-09-12T01:26:04.145236125Z\", \"created_by\": \"/bin/sh -c mv -fZ /tmp/ubi.repo /etc/yum.repos.d/ubi.repo || :\", \"comment\": \"FROM registry.redhat.io/ubi9/ubi-minimal@sha256:1b6d711648229a1c987f39cfdfccaebe2bd92d0b5d8caa5dbaa5234a9278a0b2\"}, {\"created\": \"2024-09-12T02:21:41.337341085Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:21:41.337725551Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE PIP_CERT\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:21:41.337754435Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE PIP_CERT PIP_INDEX_URL\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:21:41.33779819Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE PIP_CERT PIP_INDEX_URL REMOTE_SOURCE\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:21:41.337815557Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE PIP_CERT PIP_INDEX_URL REMOTE_SOURCE REMOTE_SOURCE_DIR\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:21:41.909796671Z\", \"created_by\": \"|5 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642385:5327c248ed592c87ca516608060e@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642385/simple REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c mv -f /etc/yum.repos.d/ubi.repo /tmp || :\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:21:42.126243887Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:5b1f650e1376d79fa3a65df4a154ea5166def95154b52c1c1097dfd8fc7d58eb in /tmp/tls-ca-bundle.pem \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:21:42.377852771Z\", \"created_by\": \"/bin/sh -c #(nop) ADD multi:d4e9e82bce04ff52623eaefbe4551825e4a7cf76baf8a914063d2c6027b6922a in /etc/yum.repos.d/ \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:21:42.377921465Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE PIP_CERT PIP_INDEX_URL REMOTE_SOURCE REMOTE_SOURCE_DIR\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:21:42.378051383Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE PIP_CERT PIP_INDEX_URL PKGMGR_OPTS REMOTE_SOURCE REMOTE_SOURCE_DIR\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:21:42.589430297Z\", \"created_by\": \"/bin/sh -c #(nop) COPY file:6c924bf470618ec69cc853b1de266be7eaafaaabc1a3bbd83ee37de2fcf92029 in $PIP_CERT \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:21:42.853394859Z\", \"created_by\": \"/bin/sh -c #(nop) COPY dir:1a4b19d3dd5ba16bb85506b8c216d60a7affa4fbc9e464fb489798eb69153fb7 in /output \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:08.501123858Z\", \"created_by\": \"|8 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642385:5327c248ed592c87ca516608060e@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642385/simple PKGMGR_OPTS=--nodocs --setopt=install_weak_deps=0 --setopt=rhel-9-for-$(arch)-appstream-rpms.excludepkgs=ansible-core REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c sed -i -e '/setuptools/d' /output/upper-constraints.txt   && /output/install-from-bindep   && rm -rf /output\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:09.108483198Z\", \"created_by\": \"|8 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642385:5327c248ed592c87ca516608060e@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642385/simple PKGMGR_OPTS=--nodocs --setopt=install_weak_deps=0 --setopt=rhel-9-for-$(arch)-appstream-rpms.excludepkgs=ansible-core REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c rm -rf $PIP_CERT\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:09.741650851Z\", \"created_by\": \"|8 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642385:5327c248ed592c87ca516608060e@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642385/simple PKGMGR_OPTS=--nodocs --setopt=install_weak_deps=0 --setopt=rhel-9-for-$(arch)-appstream-rpms.excludepkgs=ansible-core REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c for dir in       /home/runner       /home/runner/.ansible       /home/runner/.ansible/tmp       /runner       /home/runner       /runner/env       /runner/inventory       /runner/project       /runner/artifacts ;     do mkdir -m 0775 -p $dir ; chmod -R g+rwx $dir ; chgrp -R root $dir ; done &&     for file in       /home/runner/.ansible/galaxy_token       /etc/passwd       /etc/group ;     do touch $file ; chmod g+rw $file ; chgrp root $file ; done\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:29.719284776Z\", \"created_by\": \"|8 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642385:5327c248ed592c87ca516608060e@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642385/simple PKGMGR_OPTS=--nodocs --setopt=install_weak_deps=0 --setopt=rhel-9-for-$(arch)-appstream-rpms.excludepkgs=ansible-core REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c microdnf reinstall --setopt=install_weak_deps=0 --nodocs -y tzdata &&     microdnf clean all\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:29.761043458Z\", \"created_by\": \"/bin/sh -c #(nop) VOLUME /runner\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:29.810398346Z\", \"created_by\": \"/bin/sh -c #(nop) WORKDIR /runner\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:29.856622991Z\", \"created_by\": \"/bin/sh -c #(nop) ENV HOME=/home/runner\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:30.549580829Z\", \"created_by\": \"|8 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642385:5327c248ed592c87ca516608060e@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642385/simple PKGMGR_OPTS=--nodocs --setopt=install_weak_deps=0 --setopt=rhel-9-for-$(arch)-appstream-rpms.excludepkgs=ansible-core REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c cp /usr/share/ansible-runner/utils/entrypoint.sh /bin/entrypoint\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:31.201333078Z\", \"created_by\": \"|8 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642385:5327c248ed592c87ca516608060e@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642385/simple PKGMGR_OPTS=--nodocs --setopt=install_weak_deps=0 --setopt=rhel-9-for-$(arch)-appstream-rpms.excludepkgs=ansible-core REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c chmod +x /bin/entrypoint\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:31.245452125Z\", \"created_by\": \"/bin/sh -c #(nop) ENTRYPOINT [\\\"entrypoint\\\"]\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:31.290434592Z\", \"created_by\": \"/bin/sh -c #(nop) CMD [\\\"ansible-runner\\\", \\\"run\\\", \\\"/runner\\\"]\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:31.334583669Z\", \"created_by\": \"/bin/sh -c #(nop) ENV DESCRIPTION=\\\"Red Hat Ansible Automation Platform Minimal Execution Environment\\\"     container=oci\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:31.376695805Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL com.redhat.component=\\\"ee-minimal-container\\\"       name=\\\"ansible-automation-platform-24/ee-minimal-rhel9\\\"       version=\\\"1.0.0\\\"       summary=\\\"${DESCRIPTION}\\\"       io.openshift.expose-services=\\\"\\\"       io.openshift.tags=\\\"automation,ansible\\\"       io.k8s.display-name=\\\"ee-minimal-rhel9\\\"       maintainer=\\\"Ansible Automation Platform Productization Team\\\"       description=\\\"${DESCRIPTION}\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:31.422921685Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL release=727\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:31.689403237Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:f4c205fabf22733d3fc6207906064a7702bf5391e8f46148369a9e2e99c88f0a in /root/buildinfo/content_manifests/ee-minimal-container-1.0.0-727.json \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:31.957093518Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:53791d63f51002e792339edeec87ad0e4a23d599f7cb057b271728f950472621 in /root/buildinfo/Dockerfile-ansible-automation-platform-24-ee-minimal-rhel9-1.0.0-727 \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:32.003294504Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL \\\"com.redhat.license_terms\\\"=\\\"https://www.redhat.com/agreements\\\" \\\"distribution-scope\\\"=\\\"public\\\" \\\"vendor\\\"=\\\"Red Hat, Inc.\\\" \\\"build-date\\\"=\\\"2024-09-12T02:16:47\\\" \\\"architecture\\\"=\\\"x86_64\\\" \\\"vcs-type\\\"=\\\"git\\\" \\\"vcs-ref\\\"=\\\"d3b8ad4e4923ac0c5afcbbfa17ef2485fa046b2d\\\" \\\"io.k8s.description\\\"=\\\"Red Hat Ansible Automation Platform Minimal Execution Environment\\\" \\\"url\\\"=\\\"https://access.redhat.com/containers/#/registry.access.redhat.com/ansible-automation-platform-24/ee-minimal-rhel9/images/1.0.0-727\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:32.700004731Z\", \"created_by\": \"|8 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642385:5327c248ed592c87ca516608060e@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642385/simple PKGMGR_OPTS=--nodocs --setopt=install_weak_deps=0 --setopt=rhel-9-for-$(arch)-appstream-rpms.excludepkgs=ansible-core REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c rm -f '/etc/yum.repos.d/odcs-3477539-7e68a.repo' '/etc/yum.repos.d/odcs-3477948-f80b8.repo'\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:33.413468323Z\", \"created_by\": \"|8 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642385:5327c248ed592c87ca516608060e@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642385/simple PKGMGR_OPTS=--nodocs --setopt=install_weak_deps=0 --setopt=rhel-9-for-$(arch)-appstream-rpms.excludepkgs=ansible-core REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c rm -f /tmp/tls-ca-bundle.pem\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:22:35.405566609Z\", \"created_by\": \"|8 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642385:5327c248ed592c87ca516608060e@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642385/simple PKGMGR_OPTS=--nodocs --setopt=install_weak_deps=0 --setopt=rhel-9-for-$(arch)-appstream-rpms.excludepkgs=ansible-core REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c mv -fZ /tmp/ubi.repo /etc/yum.repos.d/ubi.repo || :\", \"comment\": \"FROM registry-proxy.engineering.redhat.com/rh-osbs/ansible-automation-platform-24-ansible-python-base-rhel9@sha256:083c8cbd5f13768229198b30c365a4abbe77d360d9bd444ff5eb9db1116ff0bb\"}, {\"created\": \"2024-09-12T02:46:16.884877821Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:46:16.954359571Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE PIP_CERT\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:46:17.02799353Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE PIP_CERT PIP_INDEX_URL\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:46:17.100279001Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE PIP_CERT PIP_INDEX_URL REMOTE_SOURCE\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:46:17.158667422Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE PIP_CERT PIP_INDEX_URL REMOTE_SOURCE REMOTE_SOURCE_DIR\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:46:18.390699917Z\", \"created_by\": \"|5 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642429:0bbcdcfff78375a64a6beeb9a5c8@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642429/simple REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c mv -f /etc/yum.repos.d/ubi.repo /tmp || :\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:46:18.707977139Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:5b1f650e1376d79fa3a65df4a154ea5166def95154b52c1c1097dfd8fc7d58eb in /tmp/tls-ca-bundle.pem \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:46:19.089699465Z\", \"created_by\": \"/bin/sh -c #(nop) ADD multi:9c2325999a3f8b78a5b14dbb4c81f1e6c45b95275440f59266472f3ce542ea41 in /etc/yum.repos.d/ \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:46:19.146930136Z\", \"created_by\": \"/bin/sh -c #(nop) ARG CACHITO_ENV_FILE PIP_CERT PIP_INDEX_URL REMOTE_SOURCE REMOTE_SOURCE_DIR\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:46:19.485186685Z\", \"created_by\": \"/bin/sh -c #(nop) COPY file:6c924bf470618ec69cc853b1de266be7eaafaaabc1a3bbd83ee37de2fcf92029 in $PIP_CERT \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:46:23.368350871Z\", \"created_by\": \"/bin/sh -c #(nop) COPY dir:e3af6989cc7580950bd99d276ed067d6622874e041c956524a020bc3e1feb981 in /usr/share/ansible \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:46:24.316272347Z\", \"created_by\": \"/bin/sh -c #(nop) COPY dir:7cc8338ebfad4d9f4c4a1e1f0dfead5c7ab2417f7128a2ef022951583dee6552 in /usr/share/automation-controller \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:46:25.394026911Z\", \"created_by\": \"/bin/sh -c #(nop) COPY dir:132c57e58f1da049d490f763967de660e8482c27446fb386d2b3b2e465a491ba in /output \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:48:05.41045955Z\", \"created_by\": \"|5 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642429:0bbcdcfff78375a64a6beeb9a5c8@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642429/simple REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c sed -i -e '/setuptools/d' /output/upper-constraints.txt   && /output/install-from-bindep   && pip3 install --cache-dir=/output/wheels file:///output/vsphere-automation-sdk-python-7.0.3.2.tar.gz   && rm -rf /output/\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:48:06.205547033Z\", \"created_by\": \"|5 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642429:0bbcdcfff78375a64a6beeb9a5c8@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642429/simple REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c rm -rf $PIP_CERT\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:48:06.255848472Z\", \"created_by\": \"/bin/sh -c #(nop) ENV DESCRIPTION=\\\"Red Hat Ansible Automation Platform Supported Execution Environment\\\"     container=oci\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:48:06.317241844Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL com.redhat.component=\\\"ee-supported-container\\\"       name=\\\"ansible-automation-platform-24/ee-supported-rhel9\\\"       version=\\\"1.0.0\\\"       summary=\\\"${DESCRIPTION}\\\"       io.openshift.expose-services=\\\"\\\"       io.openshift.tags=\\\"automation,ansible\\\"       io.k8s.display-name=\\\"ee-supported-rhel9\\\"       maintainer=\\\"Ansible Automation Platform Productization Team\\\"       description=\\\"${DESCRIPTION}\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:48:06.57206223Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL release=787\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:48:06.928824695Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:241fb58deb116b13424c0cbad8fb17636465c45545b4bf6ad9f4cd09e767057f in /root/buildinfo/content_manifests/ee-supported-container-1.0.0-787.json \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:48:07.220315416Z\", \"created_by\": \"/bin/sh -c #(nop) ADD file:42d7ecd887b68362169abf85a4552e80517919ef61c14d20b1b9566892228262 in /root/buildinfo/Dockerfile-ansible-automation-platform-24-ee-supported-rhel9-1.0.0-787 \", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:48:07.285562381Z\", \"created_by\": \"/bin/sh -c #(nop) LABEL \\\"com.redhat.license_terms\\\"=\\\"https://www.redhat.com/agreements\\\" \\\"distribution-scope\\\"=\\\"public\\\" \\\"vendor\\\"=\\\"Red Hat, Inc.\\\" \\\"build-date\\\"=\\\"2024-09-12T02:34:09\\\" \\\"architecture\\\"=\\\"x86_64\\\" \\\"vcs-type\\\"=\\\"git\\\" \\\"vcs-ref\\\"=\\\"1b24672e8937648ed82b775ca47967c178836c16\\\" \\\"io.k8s.description\\\"=\\\"Red Hat Ansible Automation Platform Supported Execution Environment\\\" \\\"url\\\"=\\\"https://access.redhat.com/containers/#/registry.access.redhat.com/ansible-automation-platform-24/ee-supported-rhel9/images/1.0.0-787\\\"\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:48:08.126987549Z\", \"created_by\": \"|5 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642429:0bbcdcfff78375a64a6beeb9a5c8@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642429/simple REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c rm -f '/etc/yum.repos.d/odcs-3477584-9b165.repo' '/etc/yum.repos.d/odcs-3478072-36e49.repo'\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:48:08.955118127Z\", \"created_by\": \"|5 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642429:0bbcdcfff78375a64a6beeb9a5c8@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642429/simple REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c rm -f /tmp/tls-ca-bundle.pem\", \"empty_layer\": true}, {\"created\": \"2024-09-12T02:48:20.355437438Z\", \"created_by\": \"|5 CACHITO_ENV_FILE=/remote-source/cachito.env PIP_CERT=/remote-source/app/package-index-ca.pem PIP_INDEX_URL=https://cachito-pip-1642429:0bbcdcfff78375a64a6beeb9a5c8@cachito-nexus.engineering.redhat.com/repository/cachito-pip-hosted-1642429/simple REMOTE_SOURCE=unpacked_remote_sources REMOTE_SOURCE_DIR=/remote-source /bin/sh -c mv -fZ /tmp/ubi.repo /etc/yum.repos.d/ubi.repo || :\", \"comment\": \"FROM registry-proxy.engineering.redhat.com/rh-osbs/ansible-automation-platform-24-ee-minimal-rhel9@sha256:88c139988d96b912a7b79cc0e34b737c53d4362a972b5131f2419181066b232d\"}]}",
+  "repositories": [
+    {
+      "comparison": {
+        "advisory_rpm_mapping": [
+          {
+            "advisory_ids": [
+              "RHSA-2024:6166"
+            ],
+            "nvra": "krb5-libs-1.21.1-2.el9_4.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHSA-2024:6163"
+            ],
+            "nvra": "python3-libs-3.9.18-3.el9_4.5.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHSA-2024:6163"
+            ],
+            "nvra": "python3-3.9.18-3.el9_4.5.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHSA-2024:6194"
+            ],
+            "nvra": "podman-remote-4.9.4-10.el9_4.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHBA-2024:6168"
+            ],
+            "nvra": "systemd-pam-252-32.el9_4.7.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHSA-2024:6765"
+            ],
+            "nvra": "python3-urllib3-1.26.20-1.el9ap.noarch"
+          },
+          {
+            "advisory_ids": [
+              "RHBA-2024:6168"
+            ],
+            "nvra": "systemd-rpm-macros-252-32.el9_4.7.noarch"
+          },
+          {
+            "advisory_ids": [
+              "RHSA-2024:6166"
+            ],
+            "nvra": "krb5-workstation-1.21.1-2.el9_4.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHBA-2024:6170"
+            ],
+            "nvra": "libdnf-0.69.0-8.el9_4.1.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHSA-2024:6765"
+            ],
+            "nvra": "receptor-1.4.8-1.1.el9ap.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHSA-2024:6765"
+            ],
+            "nvra": "receptorctl-1.4.8-1.1.el9ap.noarch"
+          },
+          {
+            "advisory_ids": [
+              "RHBA-2024:6509"
+            ],
+            "nvra": "tar-1.34-6.el9_4.1.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHSA-2024:6166"
+            ],
+            "nvra": "libkadm5-1.21.1-2.el9_4.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHSA-2024:6765"
+            ],
+            "nvra": "automation-controller-cli-4.5.11-1.el9ap.noarch"
+          },
+          {
+            "advisory_ids": [
+              "RHBA-2024:6196"
+            ],
+            "nvra": "qemu-img-8.2.0-11.el9_4.6.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHSA-2024:6464"
+            ],
+            "nvra": "glib2-2.68.4-14.el9_4.1.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHBA-2024:6168"
+            ],
+            "nvra": "systemd-libs-252-32.el9_4.7.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHBA-2024:6161"
+            ],
+            "nvra": "libevent-2.1.12-8.el9_4.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHSA-2024:6166"
+            ],
+            "nvra": "krb5-pkinit-1.21.1-2.el9_4.x86_64"
+          },
+          {
+            "advisory_ids": [
+              "RHBA-2024:6168"
+            ],
+            "nvra": "systemd-252-32.el9_4.7.x86_64"
+          }
+        ],
+        "reason": "OK",
+        "reason_text": "No error",
+        "rpms": {
+          "downgrade": [],
+          "new": [],
+          "remove": [],
+          "upgrade": [
+            "krb5-libs-1.21.1-2.el9_4.x86_64",
+            "python3-libs-3.9.18-3.el9_4.5.x86_64",
+            "python3-3.9.18-3.el9_4.5.x86_64",
+            "podman-remote-4.9.4-10.el9_4.x86_64",
+            "systemd-pam-252-32.el9_4.7.x86_64",
+            "python3-urllib3-1.26.20-1.el9ap.noarch",
+            "systemd-rpm-macros-252-32.el9_4.7.noarch",
+            "krb5-workstation-1.21.1-2.el9_4.x86_64",
+            "libdnf-0.69.0-8.el9_4.1.x86_64",
+            "receptor-1.4.8-1.1.el9ap.x86_64",
+            "receptorctl-1.4.8-1.1.el9ap.noarch",
+            "tar-1.34-6.el9_4.1.x86_64",
+            "libkadm5-1.21.1-2.el9_4.x86_64",
+            "automation-controller-cli-4.5.11-1.el9ap.noarch",
+            "qemu-img-8.2.0-11.el9_4.6.x86_64",
+            "glib2-2.68.4-14.el9_4.1.x86_64",
+            "systemd-libs-252-32.el9_4.7.x86_64",
+            "libevent-2.1.12-8.el9_4.x86_64",
+            "krb5-pkinit-1.21.1-2.el9_4.x86_64",
+            "systemd-252-32.el9_4.7.x86_64"
+          ]
+        },
+        "with_nvr": "ee-supported-container-1.0.0-775"
+      },
+      "content_advisory_ids": [
+        "RHBA-2024:6196",
+        "RHSA-2024:6163",
+        "RHBA-2024:6509",
+        "RHSA-2024:6464",
+        "RHSA-2024:6765",
+        "RHBA-2024:6168",
+        "RHBA-2024:6161",
+        "RHSA-2024:6194",
+        "RHBA-2024:6170",
+        "RHSA-2024:6166"
+      ],
+      "image_advisory_id": "RHBA-2024:6772",
+      "manifest_list_digest": "sha256:05bd9f9b5189dbb43fe704d2db74f1a8dd41609108bf7d339cfb00694425364c",
+      "manifest_schema2_digest": "sha256:9b1f538af39b0918f81f8967919c5010a69500822f3f3ec0b66241522bad9dae",
+      "published": true,
+      "published_date": "2024-09-18T17:47:38+00:00",
+      "push_date": "2024-09-18T18:59:20+00:00",
+      "registry": "registry.access.redhat.com",
+      "repository": "ansible-automation-platform-24/ee-supported-rhel9",
+      "signatures": [
+        {
+          "key_long_id": "199E2F91FD431D51",
+          "tags": [
+            "latest",
+            "1.0.0",
+            "1.0",
+            "1.0.0-787"
+          ]
+        }
+      ],
+      "tags": [
+        {
+          "added_date": "2024-09-18T19:03:56.481000+00:00",
+          "name": "latest",
+          "_links": {
+            "tag_history": {
+              "href": "/v1/tag-history/registry/registry.access.redhat.com/repository/ansible-automation-platform-24/ee-supported-rhel9/tag/latest"
+            }
+          }
+        },
+        {
+          "added_date": "2024-09-18T19:03:56.481000+00:00",
+          "name": "1.0.0",
+          "_links": {
+            "tag_history": {
+              "href": "/v1/tag-history/registry/registry.access.redhat.com/repository/ansible-automation-platform-24/ee-supported-rhel9/tag/1.0.0"
+            }
+          }
+        },
+        {
+          "added_date": "2024-09-18T19:03:56.481000+00:00",
+          "name": "1.0",
+          "_links": {
+            "tag_history": {
+              "href": "/v1/tag-history/registry/registry.access.redhat.com/repository/ansible-automation-platform-24/ee-supported-rhel9/tag/1.0"
+            }
+          }
+        },
+        {
+          "added_date": "2024-09-18T19:03:56.481000+00:00",
+          "name": "1.0.0-787",
+          "_links": {
+            "tag_history": {
+              "href": "/v1/tag-history/registry/registry.access.redhat.com/repository/ansible-automation-platform-24/ee-supported-rhel9/tag/1.0.0-787"
+            }
+          }
+        }
+      ],
+      "_links": {
+        "image_advisory": {
+          "href": "/v1/advisories/redhat/id/RHBA-2024:6772"
+        },
+        "repository": {
+          "href": "/v1/repositories/registry/registry.access.redhat.com/repository/ansible-automation-platform-24/ee-supported-rhel9"
+        }
+      }
+    }
+  ],
+  "sum_layer_size_bytes": 340659060,
+  "top_layer_id": "sha256:32998343eb008b1e029134b98dcc11d92f544542df15c38a1e1c36d0133144ab",
+  "uncompressed_top_layer_id": "sha256:4f5cf5b4e24a5b46faca69eb865c82dc97af557b532d883453fb09ac2593e0d7",
+  "_links": {
+    "artifacts": {
+      "href": "/v1/images/id/66e25900681e29c2ae5882c8/artifacts"
+    },
+    "requests": {
+      "href": "/v1/images/id/66e25900681e29c2ae5882c8/requests"
+    },
+    "rpm_manifest": {
+      "href": "/v1/images/id/66e25900681e29c2ae5882c8/rpm-manifest"
+    },
+    "test_results": {
+      "href": "/v1/images/id/66e25900681e29c2ae5882c8/test-results"
+    },
+    "vulnerabilities": {
+      "href": "/v1/images/id/66e25900681e29c2ae5882c8/vulnerabilities"
+    }
+  }
+}
