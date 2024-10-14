@@ -35,6 +35,8 @@ dark_template_image_list = sorted(glob.glob(dark_template_folder + '/*'))
 target_image = os.path.expanduser('~/Downloads/poster-output-image.png')
 # logo_image = 'images/techbeatly-logo-v4.1-black.png'
 
+default_hashtags_string = "#learningeveryday #devops #techbeatly #socialkonf"
+keywords = ['Ansible', 'Automation', 'OpenShift', 'Virtualization', 'Multi-cluster', 'DevOps']
 
 # site_url = "https://towardsdatascience.com/adding-text-on-image-using-python-2f5bf61bf448"
 # "https://www.redhat.com/en/resources/4-benefits-using-rh-solutions-on-aws?sc_cid=7013a0000026Hr2AAE"
@@ -67,7 +69,7 @@ def createPoster(url,template_image,poster_output_file,font_color):
             print('Missing url...exiting')
             sys.exit()
         else:
-            print("Fetching details from: " + text_link)
+            print("\nFetching details from: " + text_link)
     else:
        text_link =  url
        print("Fetching details from: " + text_link)
@@ -161,21 +163,37 @@ def createPoster(url,template_image,poster_output_file,font_color):
         # save image
         img.save(poster_output_file)
 
+        # Dynamic hashtags
+        dynamic_hashtags = generate_hashtags(title_from_url + " " + text_meta_description, keywords)
+
+        # Convert set to a formatted string of hashtags
+        hashtags_string = ' '.join(dynamic_hashtags)
+
+        # Resulting hashtags
+        # print(hashtags_string)
+
         # output for posting
         print("\n================= Copy below text for the post =================")
         print("\n" + title_from_url)
-        print("" + text_meta_description)
-        print("\n" + text_link)
-        print("\n" + text_domain)
+        print("\n" + text_meta_description)
+        print("\nRead more: " + text_link)
+        # print("\n" + text_domain)
         print("\nFollow @techbeatly for #learningeveryday")
         print("Follow @socialkonf for #communitylearning")
-        print("\n#learning #devops #techbeatly #socialkonf\n")
+        print("\n" + default_hashtags_string )
+        print(hashtags_string + "\n")
         print("\n================================================================")
     # except Exception as e:
     #     print(e)
     #     print("Invalid URL or site not reachable!")
 
-
+# Function to generate hashtags dynamically
+def generate_hashtags(combined_text, keywords):
+    # Split the text into words
+    words = combined_text.split()
+    # Generate hashtags only from the keywords found in the text
+    hashtag_set = {f"#{word.lower()}" for word in words if word in keywords}
+    return hashtag_set
 
 def init_poster(argv):
     arg_url = ""
@@ -196,16 +214,16 @@ def init_poster(argv):
                 sys.exit(2)
             elif opt in ("-u", "--url"):
                 arg_url = arg
-                print('url:', arg_url)
+                # print('url:', arg_url)
             elif opt in ("-t", "--template"):
                 arg_template = arg
-                print('template:', arg_template)
+                # print('template:', arg_template)
             elif opt in ("-m", "--mode"):
                 arg_mode = arg
-                print('mode:', arg_mode)
+                # print('mode:', arg_mode)
             elif opt in ("-o", "--output"):
                 arg_output = arg
-                print('output:', arg_output)
+                # print('output:', arg_output)
 
         if arg_mode == "dark":
             template_file_list = dark_template_image_list
