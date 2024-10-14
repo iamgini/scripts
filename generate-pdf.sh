@@ -1,0 +1,1 @@
+pdftk `ls -1 *.pdf | grep -v 'final.pdf' | tr '\n' ' '` cat output final.pdf

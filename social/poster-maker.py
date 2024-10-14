@@ -1,9 +1,11 @@
 #!usr/bin/env
-
+import os
 import sys
 import getopt
 # text wrap
 import textwrap
+# For files
+import glob
 
 # install library - pip install pillow
 # import libraries
@@ -23,13 +25,14 @@ import random
 
 border_left = 120
 starting_point = 120
-# template_image_list = ['poster-template-1', 'poster-template-2','poster-template-3','poster-template-4','poster-template-5','poster-template-6','poster-template-7','poster-template-8']
-template_image_list = ['poster-template-1', 'poster-template-2','poster-template-3']
-#template_image = 'images/poster-template-3.png'
-template_image = 'images/' + random.choice(template_image_list) + ".png"
+light_template_folder = 'light-templates'
+dark_template_folder = 'dark-templates'
+light_template_image_list = sorted(glob.glob(light_template_folder + '/*'))
+dark_template_image_list = sorted(glob.glob(dark_template_folder + '/*'))
+# print(light_template_image_list)
+# print(dark_template_image_list)
 
-target_image = '/home/gmadappa/Downloads/poster-output-image.png'
-# target_image = './poster-output-image.png'
+target_image = os.path.expanduser('~/Downloads/poster-output-image.png')
 # logo_image = 'images/techbeatly-logo-v4.1-black.png'
 
 
@@ -54,7 +57,7 @@ def wraptext(input_text,wrap_width):
     caption_new += word_list[-1]
     return caption_new
 
-def createPoster(url,template_number,output):
+def createPoster(url,template_image,poster_output_file,font_color):
 
     # check if URL already provided, else collect
     if len(url) < 1:
@@ -69,11 +72,7 @@ def createPoster(url,template_number,output):
        text_link =  url
        print("Fetching details from: " + text_link)
 
-    # check if template mentioned, else use random
-    if len(template_number) > 0:
-        template_image = 'images/poster-template-' + template_number + ".png"
-    else:
-        template_image = 'images/' + random.choice(template_image_list) + ".png"
+
 
     # target_image = '/home/gmadappa/Downloads/poster-output-image.png'
 
@@ -126,15 +125,15 @@ def createPoster(url,template_number,output):
         # add text to image
         ## domain name
         text_y = starting_point + 100
-        I1.text((border_left,text_y), text_domain_wrapped, font=font_site, fill=(0, 0, 0))
+        I1.text((border_left,text_y), text_domain_wrapped, font=font_site, fill=font_color)
 
         ## Post Title
         text_y = text_y + 100
-        I1.text((border_left, text_y), text_title_wrapped, font=font_title, fill=(0, 0, 0))
+        I1.text((border_left, text_y), text_title_wrapped, font=font_title, fill=font_color)
 
         # ## debug
         # text_y = text_y + 100
-        # I1.text((border_left, text_y), 'debug', font=font_title, fill=(0, 0, 0))
+        # I1.text((border_left, text_y), 'debug', font=font_title, fill=font_color)
 
         # add the height for title x number of lines
         text_title_wrapped_line_height = 70 * len(text_title_wrapped.splitlines())
@@ -144,7 +143,7 @@ def createPoster(url,template_number,output):
         if len(text_meta_description) > 10:
             text_y = text_y + text_title_wrapped_line_height + 50
             text_meta_description_wrapped = wraptext(text_meta_description,60)
-            I1.text((border_left, text_y), text_meta_description_wrapped, font=font_site, fill=(0, 0, 0))
+            I1.text((border_left, text_y), text_meta_description_wrapped, font=font_site, fill=font_color)
 
             # calculate size and height of description text
             text_meta_description_wrapped_line_height = 30 * len(text_meta_description_wrapped.splitlines())
@@ -154,13 +153,13 @@ def createPoster(url,template_number,output):
 
         ## add URL text
         text_y = text_y + text_meta_description_wrapped_line_height + 50
-        I1.text((border_left, text_y), text_link_wrapped, font=font_link, fill=(0, 0, 0))
+        I1.text((border_left, text_y), text_link_wrapped, font=font_link, fill=font_color)
 
         ## add logo
         # image_logo = Image.open(logo_image)
         # img.paste(image_logo,(0,0),image_logo)
         # save image
-        img.save(target_image)
+        img.save(poster_output_file)
 
         # output for posting
         print("\n================= Copy below text for the post =================")
@@ -178,82 +177,77 @@ def createPoster(url,template_number,output):
 
 
 
-def myfunc(argv):
+def init_poster(argv):
     arg_url = ""
-    arg_output = ""
+    # Set default output file
+    arg_output = target_image
+    arg_mode = ""
     arg_template = ""
-    arg_help = "{0} -u <url> -t <background-template-number> -o <output-file>".format(argv[0])
+    template_list = ""
+    arg_help = "{0} -u <url> -t <background-template-number> -o <output-file> -m <dark or light>".format(argv[0])
 
     try:
-        opts, args = getopt.getopt(argv[1:], "hu:t:o:", ["help", "url=",
-        "template=", "output="])
+        opts, args = getopt.getopt(argv[1:], "hu:t:o:m:", ["help", "url=",
+        "template=", "output=","mode="])
         for opt, arg in opts:
+            print("loop")
             if opt in ("-h", "--help"):
                 # print the help message and exit
-                print(arg_help + str("hi"))
+                print(str("\nExample usage:\n\n") + arg_help)
                 sys.exit(2)
             elif opt in ("-u", "--url"):
                 arg_url = arg
+                print('url:', arg_url)
             elif opt in ("-t", "--template"):
                 arg_template = arg
+                print('template:', arg_template)
+            elif opt in ("-m", "--mode"):
+                arg_mode = arg
+                print('mode:', arg_mode)
             elif opt in ("-o", "--output"):
                 arg_output = arg
+                print('output:', arg_output)
 
-            # print('url:', arg_url)
-            # print('template:', arg_template)
-            # print('output:', arg_output)
+        if arg_mode == "dark":
+            template_file_list = dark_template_image_list
+            font_color = (255, 255, 255)
+        if arg_mode == "light":
+            template_file_list = light_template_image_list
+            font_color = (0, 0, 0)
+        else:
+            # default = dark
+            template_file_list = dark_template_image_list
+            font_color = (255, 255, 255)
+        print('L:', template_file_list)
 
+        # check if template number mentioned, else use random
+        if len(arg_template) > 0:
+            template_image_number = int(arg_template) - 1
+        else:
+            template_image_number = random.randint(0, len(template_file_list) - 1)
+        print('TN:', template_image_number, ", color:", font_color)
 
-            # call createPoster function with details
-            createPoster(arg_url,arg_template,arg_output)
+        # set the template
+        try:
+            template_file = template_file_list[template_image_number]
+        except Exception as index_error:
+            print(index_error)
+            print("Image number doesn't exist; using random template!")
+            template_image_number = random.randint(0, len(template_file_list) - 1)
+            template_file = template_file_list[template_image_number]
+        print('T:', template_file)
+
+        # print('O:', arg_output)
+
+        # call createPoster function with details
+        createPoster(arg_url,template_file,arg_output,font_color)
 
     except Exception as e:
         print(e)
         print(arg_help)
         sys.exit(2)
 
-    # for opt, arg in opts:
-    #     if opt in ("-h", "--help"):
-    #         print(arg_help)  # print the help message
-    #         sys.exit(2)
-    #     elif opt in ("-i", "--input"):
-    #         arg_input = arg
-    #     elif opt in ("-u", "--user"):
-    #         arg_user = arg
-    #     elif opt in ("-o", "--output"):
-    #         arg_output = arg
 
-    # print('input:', arg_input)
-    # print('user:', arg_user)
-    # print('output:', arg_output)
-
-
-
-# Fetch the URL from arguments if any
-# if len(sys.argv)>1:
-#     text_link = sys.argv[1]
-# else:
-#     print("Missing url!")
-#     text_link = input("Enter the URL: ")
-#     if len(text_link) <1:
-#         print('Missing url...exiting')
-#         sys.exit()
-#     else:
-#         print("Fetching details from: " + text_link)
-
-# # Fetch specific image template from arguments if any
-# if len(sys.argv)>2:
-#     text_link = sys.argv[1]
-# else:
-#     print("Missing url!")
-#     text_link = input("Enter the URL: ")
-#     if len(text_link) <1:
-#         print('Missing url...exiting')
-#         sys.exit()
-#     else:
-#         print("Fetching details from: " + text_link)
-
-# template_image = 'images/' + random.choice(template_image_list)
 
 if __name__ == "__main__":
-    myfunc(sys.argv)
+    init_poster(sys.argv)

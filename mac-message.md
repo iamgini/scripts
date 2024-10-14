@@ -1,0 +1,1 @@
+sudo -u user osascript -e 'display dialog "Your game time is ending soon. Please stop screen usage!" with title "Message!"'
