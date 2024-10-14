@@ -36,7 +36,7 @@ target_image = os.path.expanduser('~/Downloads/poster-output-image.png')
 # logo_image = 'images/techbeatly-logo-v4.1-black.png'
 
 default_hashtags_string = "#learningeveryday #devops #techbeatly #socialkonf"
-keywords = ['Ansible', 'Automation', 'OpenShift', 'Virtualization', 'Multi-cluster', 'DevOps']
+keywords = ['Ansible', 'Automation', 'OpenShift', 'Virtualization', 'Multi-cluster', 'DevOps', 'kubernetes', 'jenkins', 'cicd', 'gitops']
 
 # site_url = "https://towardsdatascience.com/adding-text-on-image-using-python-2f5bf61bf448"
 # "https://www.redhat.com/en/resources/4-benefits-using-rh-solutions-on-aws?sc_cid=7013a0000026Hr2AAE"
