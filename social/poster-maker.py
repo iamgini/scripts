@@ -190,7 +190,6 @@ def init_poster(argv):
         opts, args = getopt.getopt(argv[1:], "hu:t:o:m:", ["help", "url=",
         "template=", "output=","mode="])
         for opt, arg in opts:
-            print("loop")
             if opt in ("-h", "--help"):
                 # print the help message and exit
                 print(str("\nExample usage:\n\n") + arg_help)
@@ -218,14 +217,14 @@ def init_poster(argv):
             # default = dark
             template_file_list = dark_template_image_list
             font_color = (255, 255, 255)
-        print('L:', template_file_list)
+        # print('L:', template_file_list)
 
         # check if template number mentioned, else use random
         if len(arg_template) > 0:
             template_image_number = int(arg_template) - 1
         else:
             template_image_number = random.randint(0, len(template_file_list) - 1)
-        print('TN:', template_image_number, ", color:", font_color)
+        # print('TN:', template_image_number, ", color:", font_color)
 
         # set the template
         try:
@@ -235,7 +234,7 @@ def init_poster(argv):
             print("Image number doesn't exist; using random template!")
             template_image_number = random.randint(0, len(template_file_list) - 1)
             template_file = template_file_list[template_image_number]
-        print('T:', template_file)
+        # print('T:', template_file)
 
         # print('O:', arg_output)
 
