@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 xml_input_file = "stig-data.xml"
 # Define the namespace
 ns = {'ns': 'http://checklists.nist.gov/xccdf/1.1'}
+
 # def extract_plain_texts(root):
 #     """Extracts plain-text fields."""
 #     plain_texts = {}
@@ -106,6 +107,33 @@ def extract_metadata(root):
         'status': status.text.strip() if status is not None else 'N/A'
     }
 
+def extract_groups_and_rules(root):
+    """Extracts groups and their associated rules from the Benchmark node."""
+    groups_info = []
+
+    # Find all Group elements
+    groups = root.findall('ns:Group', ns)
+    for group in groups:
+        group_title = group.find('ns:title', ns)
+        group_description = group.find('ns:GroupDescription', ns)
+
+        # Collect group information
+        group_info = {
+            'title': group_title.text.strip() if group_title is not None else 'N/A',
+            'description': group_description.text.strip() if group_description is not None else 'N/A',
+            'rules': []
+        }
+
+        # Find all Rule elements within the current Group
+        rules = group.findall('ns:Rule', ns)
+        for rule in rules:
+            rule_id = rule.get('id')
+            group_info['rules'].append(rule_id)
+
+        groups_info.append(group_info)
+
+    return groups_info
+
 def clean_xml(file_path):
     """Removes any potential BOM or hidden characters from the XML file."""
     with open(file_path, 'rb') as f:
@@ -132,11 +160,22 @@ def main():
     # Extract metadata from the Benchmark node
     metadata = extract_metadata(root)
 
+    # Extract groups and rules
+    groups_info = extract_groups_and_rules(root)
+
     # Display extracted values for verification
     print(f"Title: {metadata['title']}")
     print(f"Description: {metadata['description']}")
     print(f"Status: {metadata['status']}")
 
+    # Display group information
+    print("\nGroups:")
+    for group in groups_info:
+        print(f"- Group Title: {group['title']}")
+        print(f"  Description: {group['description']}")
+        print("  Rules:")
+        for rule_id in group['rules']:
+            print(f"    - Rule ID: {rule_id}")
     # Extract the title and description
     # title = root.findtext('title')
     # description = root.findtext('description')
