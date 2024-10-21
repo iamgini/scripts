@@ -25,6 +25,7 @@ import random
 
 border_left = 120
 starting_point = 120
+keywords_source_file = 'keywords.txt'
 light_template_folder = 'light-templates'
 dark_template_folder = 'dark-templates'
 light_template_image_list = sorted(glob.glob(light_template_folder + '/*'))
@@ -36,10 +37,12 @@ target_image = os.path.expanduser('~/Downloads/poster-output-image.png')
 # logo_image = 'images/techbeatly-logo-v4.1-black.png'
 
 default_hashtags_string = "#learningeveryday #devops #techbeatly #socialkonf"
-keywords = ['Ansible', 'Automation', 'OpenShift', 'Virtualization', 'Multi-cluster', 'DevOps', 'kubernetes', 'jenkins', 'cicd', 'gitops']
+# keywords = ['Ansible', 'Automation', 'OpenShift', 'Virtualization', 'Multi-cluster', 'DevOps', 'kubernetes', 'jenkins', 'cicd', 'gitops']
+# Open the file and read the keywords into a list
+with open(keywords_source_file, 'r') as file:
+    keywords = [line.strip() for line in file]
 
-# site_url = "https://towardsdatascience.com/adding-text-on-image-using-python-2f5bf61bf448"
-# "https://www.redhat.com/en/resources/4-benefits-using-rh-solutions-on-aws?sc_cid=7013a0000026Hr2AAE"
+
 
 # set font
 font_title = ImageFont.truetype('fonts/Figtree-Black.ttf',size=72)
@@ -268,3 +271,5 @@ def init_poster(argv):
 
 if __name__ == "__main__":
     init_poster(sys.argv)
+
+# site_url = "https://towardsdatascience.com/adding-text-on-image-using-python-2f5bf61bf448"
