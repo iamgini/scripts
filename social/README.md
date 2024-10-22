@@ -29,3 +29,4 @@ Redirect URL: https://www.linkedin.com/developers/tools/oauth/redirect
 
 - [Share on LinkedIn](https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/posts-api?view=li-lms-2024-10&tabs=http)
 - [Push API \ Publish a post on a LinkedIn company page](https://docs.oneall.com/api/resources/push/linkedin/company/post/)
+- [LinkedIn Marketing API Program](https://learn.microsoft.com/en-us/linkedin/marketing/?view=li-lms-2024-10)

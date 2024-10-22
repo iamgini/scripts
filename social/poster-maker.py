@@ -7,6 +7,8 @@ import textwrap
 # For files
 import glob
 
+import subprocess
+
 # install library - pip install pillow
 # import libraries
 from PIL import Image, ImageFont, ImageDraw, ImageFilter
@@ -46,8 +48,13 @@ with open(keywords_source_file, 'r') as file:
 
 # set font
 font_title = ImageFont.truetype('fonts/Figtree-Black.ttf',size=72)
-font_site = ImageFont.truetype('fonts/Figtree-Regular.ttf',size=32)
-font_link = ImageFont.truetype('fonts/Figtree-Regular.ttf',size=24)
+font_site = ImageFont.truetype('fonts/Figtree-Regular.ttf',size=42)
+font_link = ImageFont.truetype('fonts/Figtree-Regular.ttf',size=32)
+
+# Define a line height, can be based on the font size or a fixed value
+title_line_height = 80  # Height for title lines
+description_line_height = 50  # Height for description lines
+link_line_height = 40  # Height for link lines
 
 # text_title = 'Obama warns far-left candidates says average American does not want to tear down the system'
 # text_link = 'https://developers.redhat.com/articles/2022/08/01/containerize-net-applications-without-writing-dockerfiles?sc_cid=7013a000002i7tiAAA'
@@ -120,8 +127,8 @@ def createPoster(url,template_image,poster_output_file,font_color):
 
         # wrap the texts
         text_title_wrapped = wraptext(title_from_url,25)
-        text_domain_wrapped = wraptext(text_domain,80)
-        text_link_wrapped = wraptext(text_link,80)
+        text_domain_wrapped = wraptext(text_domain,60)
+        text_link_wrapped = wraptext(text_link,55)
 
 
         # draw image object
@@ -129,35 +136,34 @@ def createPoster(url,template_image,poster_output_file,font_color):
 
         # add text to image
         ## domain name
-        text_y = starting_point + 100
+        text_y = starting_point + 0
         I1.text((border_left,text_y), text_domain_wrapped, font=font_site, fill=font_color)
 
         ## Post Title
         text_y = text_y + 100
-        I1.text((border_left, text_y), text_title_wrapped, font=font_title, fill=font_color)
+        # I1.text((border_left, text_y), text_title_wrapped, font=font_title, fill=font_color)
 
-        # ## debug
-        # text_y = text_y + 100
-        # I1.text((border_left, text_y), 'debug', font=font_title, fill=font_color)
+        for line in text_title_wrapped.splitlines():
+            I1.text((border_left, text_y), line, font=font_title, fill=font_color)
+            text_y += title_line_height  # Move Y position down for the next line
 
-        # add the height for title x number of lines
-        text_title_wrapped_line_height = 70 * len(text_title_wrapped.splitlines())
+        # Add gap
+        text_y += 50
 
-        ## Post description
+        # Post description
         # print(len(text_meta_description))
         if len(text_meta_description) > 10:
-            text_y = text_y + text_title_wrapped_line_height + 50
-            text_meta_description_wrapped = wraptext(text_meta_description,60)
-            I1.text((border_left, text_y), text_meta_description_wrapped, font=font_site, fill=font_color)
 
-            # calculate size and height of description text
-            text_meta_description_wrapped_line_height = 30 * len(text_meta_description_wrapped.splitlines())
-        else:
-            text_meta_description_wrapped_line_height = 0
-            text_y = text_y + text_title_wrapped_line_height + 50
+            # text_y = text_y + text_title_wrapped_line_height + 50
+            text_meta_description_wrapped = wraptext(text_meta_description, 42)
+            for line in text_meta_description_wrapped.splitlines():
+                I1.text((border_left, text_y), line, font=font_site, fill=font_color)
+                text_y += description_line_height  # Move Y position down for the next line
+
+            # Add gap
+            text_y += 50
 
         ## add URL text
-        text_y = text_y + text_meta_description_wrapped_line_height + 50
         I1.text((border_left, text_y), text_link_wrapped, font=font_link, fill=font_color)
 
         ## add logo
@@ -186,6 +192,8 @@ def createPoster(url,template_image,poster_output_file,font_color):
         print("\n" + default_hashtags_string )
         print(hashtags_string + "\n")
         print("\n================================================================")
+
+        subprocess.run(["xdg-open", poster_output_file])
     # except Exception as e:
     #     print(e)
     #     print("Invalid URL or site not reachable!")
@@ -261,6 +269,8 @@ def init_poster(argv):
 
         # call createPoster function with details
         createPoster(arg_url,template_file,arg_output,font_color)
+
+
 
     except Exception as e:
         print(e)
