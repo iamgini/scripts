@@ -73,7 +73,10 @@ def get_linkedin_company_id():
     """
     Retrieves the Company ID
     """
-    API_URL = "https://api.linkedin.com/v2/organizations?q=companies&keywords=" + urllib.parse.quote(linkedin_company_name)
+
+    API_URL = f"https://api.linkedin.com/v2/organizations?q=vanityName&vanityName={linkedin_company_name}"
+
+    # API_URL = "https://api.linkedin.com/v2/organizations?q=companies&keywords=" + urllib.parse.quote(linkedin_company_name)
 
     headers = {
         "Authorization": f"Bearer {LINKEDIN_ACCESS_TOKEN}",
@@ -87,9 +90,12 @@ def get_linkedin_company_id():
         print(f"Error retrieving LinkedIn Company ID: {response.json()}")
         return None
     else:
-        company_id = response.json().get("id")
-        print(f"Retrieved LinkedIn Company ID: {company_id}")
-        return company_id
+        # company_id = response.json().get("id")
+        # print(f"Retrieved LinkedIn Company ID: {company_id}")
+        # return company_id
+        company_urn = response.json().get("elements")[0].get("organizationalEntity")
+        print(f"Retrieved LinkedIn Company URN: {company_urn}")
+        return company_urn
 
 
 def create_text_post(content):
@@ -149,6 +155,41 @@ def create_text_post(content):
     else:
         print("Posted on LinkedIn successfully!")
 
+def create_text_post_for_company(content):
+    """
+    Creates a post on LinkedIn as the company page.
+    """
+    # Get the company URN
+    company_urn = get_linkedin_company_id()
+
+    headers = {
+        "Authorization": f"Bearer {LINKEDIN_ACCESS_TOKEN}",
+        "Content-Type": "application/json",
+    }
+
+    data = json.dumps({
+        "author": f"{company_urn}",
+        "lifecycleState": "PUBLISHED",
+        "visibility": "PUBLIC",
+        "commentary": content,
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "targetEntities": [],
+          "thirdPartyDistributionChannels": []
+        },
+        "isReshareDisabledByAuthor": False
+    })
+
+    response = requests.post(
+        LINKEDIN_API_URL,
+        headers=headers,
+        data=data
+    )
+    if response.status_code != 201:
+        print(f"Error posting on LinkedIn as company: {response.json()}")
+    else:
+        print("Posted on LinkedIn as the company successfully!")
+
 def create_post_with_image(image_path, caption):
     # Get the member ID
     LINKEDIN_MEMBER_ID = get_linkedin_member_id()
@@ -200,9 +241,11 @@ def create_post_with_image(image_path, caption):
 
 if __name__ == '__main__':
     image_url = 'https://www.techbeatly.com/wp-content/uploads/2023/04/openshift-compliance-operator.png'
-    # get_linkedin_company_id()
+
     content = "Test Post"
-    create_text_post(content)
+    # create_text_post(content)
+
+    create_text_post_for_company(content)
 
 
     image_path = "poster-output-image.png"
