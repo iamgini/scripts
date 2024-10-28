@@ -45,16 +45,39 @@ with open(keywords_source_file, 'r') as file:
     keywords = [line.strip() for line in file]
 
 
+# Define template styles with nested dictionaries for different styles
+template_styles = {
+    'medium': {
+        'font_title': ImageFont.truetype('fonts/Figtree-Black.ttf', size=72),
+        'font_site': ImageFont.truetype('fonts/Figtree-Regular.ttf', size=32),
+        'font_link': ImageFont.truetype('fonts/Figtree-Regular.ttf', size=24),
+        'title_line_height': 68,
+        'description_line_height': 40,
+        'link_line_height': 30
+    },
+    'large': {
+        'font_title': ImageFont.truetype('fonts/Figtree-Black.ttf', size=96),
+        'font_site': ImageFont.truetype('fonts/Figtree-Regular.ttf', size=56),
+        'font_link': ImageFont.truetype('fonts/Figtree-Regular.ttf', size=44),
+        'title_line_height': 100,
+        'description_line_height': 70,
+        'link_line_height': 60
+    }
+    # Additional styles can be added here
+}
 
-# set font
-font_title = ImageFont.truetype('fonts/Figtree-Black.ttf',size=72)
-font_site = ImageFont.truetype('fonts/Figtree-Regular.ttf',size=42)
-font_link = ImageFont.truetype('fonts/Figtree-Regular.ttf',size=32)
+# Choose a style; set to None if no specific style is selected
+selected_style_name = None  # or 'large', 'medium', etc.
 
-# Define a line height, can be based on the font size or a fixed value
-title_line_height = 80  # Height for title lines
-description_line_height = 50  # Height for description lines
-link_line_height = 40  # Height for link lines
+# # set font
+# font_title = ImageFont.truetype('fonts/Figtree-Black.ttf',size=72)
+# font_site = ImageFont.truetype('fonts/Figtree-Regular.ttf',size=42)
+# font_link = ImageFont.truetype('fonts/Figtree-Regular.ttf',size=32)
+
+# # Define a line height, can be based on the font size or a fixed value
+# title_line_height = 80  # Height for title lines
+# description_line_height = 50  # Height for description lines
+# link_line_height = 40  # Height for link lines
 
 # text_title = 'Obama warns far-left candidates says average American does not want to tear down the system'
 # text_link = 'https://developers.redhat.com/articles/2022/08/01/containerize-net-applications-without-writing-dockerfiles?sc_cid=7013a000002i7tiAAA'
@@ -69,7 +92,7 @@ def wraptext(input_text,wrap_width):
     caption_new += word_list[-1]
     return caption_new
 
-def createPoster(url,template_image,poster_output_file,font_color):
+def createPoster(url,template_image,poster_output_file,font_color,font_style):
 
     # check if URL already provided, else collect
     if len(url) < 1:
@@ -84,7 +107,16 @@ def createPoster(url,template_image,poster_output_file,font_color):
        text_link =  url
        print("Fetching details from: " + text_link)
 
+    # Use 'medium' as default if no style is provided
+    selected_style = template_styles[font_style] if selected_style_name in template_styles else template_styles['medium']
 
+    # Access fonts and line heights from the selected style
+    font_title = selected_style['font_title']
+    font_site = selected_style['font_site']
+    font_link = selected_style['font_link']
+    title_line_height = selected_style['title_line_height']
+    description_line_height = selected_style['description_line_height']
+    link_line_height = selected_style['link_line_height']
 
     # target_image = '/home/gmadappa/Downloads/poster-output-image.png'
 
@@ -213,10 +245,11 @@ def init_poster(argv):
     arg_mode = ""
     arg_template = ""
     template_list = ""
-    arg_help = "{0} -u <url> -t <background-template-number> -o <output-file> -m <dark or light>".format(argv[0])
+    arg_style = ""
+    arg_help = "{0} -u <url> -t <background-template-number> -o <output-file> -s <medium/large> -m <dark or light>".format(argv[0])
 
     try:
-        opts, args = getopt.getopt(argv[1:], "hu:t:o:m:", ["help", "url=",
+        opts, args = getopt.getopt(argv[1:], "hu:t:o:m:s:", ["help", "url=",
         "template=", "output=","mode="])
         for opt, arg in opts:
             if opt in ("-h", "--help"):
@@ -231,6 +264,9 @@ def init_poster(argv):
                 # print('template:', arg_template)
             elif opt in ("-m", "--mode"):
                 arg_mode = arg
+                # print('mode:', arg_mode)
+            elif opt in ("-s", "--style"):
+                arg_style = arg
                 # print('mode:', arg_mode)
             elif opt in ("-o", "--output"):
                 arg_output = arg
@@ -267,9 +303,9 @@ def init_poster(argv):
 
         # print('O:', arg_output)
 
-        # call createPoster function with details
-        createPoster(arg_url,template_file,arg_output,font_color)
 
+        # call createPoster function with details
+        createPoster(arg_url,template_file,arg_output,font_color,arg_style)
 
 
     except Exception as e:
