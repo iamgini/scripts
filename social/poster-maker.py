@@ -56,9 +56,9 @@ template_styles = {
         'link_line_height': 30
     },
     'large': {
-        'font_title': ImageFont.truetype('fonts/Figtree-Black.ttf', size=96),
-        'font_site': ImageFont.truetype('fonts/Figtree-Regular.ttf', size=56),
-        'font_link': ImageFont.truetype('fonts/Figtree-Regular.ttf', size=44),
+        'font_title': ImageFont.truetype('fonts/Figtree-Black.ttf', size=80),
+        'font_site': ImageFont.truetype('fonts/Figtree-Regular.ttf', size=46),
+        'font_link': ImageFont.truetype('fonts/Figtree-Regular.ttf', size=32),
         'title_line_height': 100,
         'description_line_height': 70,
         'link_line_height': 60
@@ -67,7 +67,7 @@ template_styles = {
 }
 
 # Choose a style; set to None if no specific style is selected
-selected_style_name = None  # or 'large', 'medium', etc.
+# selected_style_name = None  # or 'large', 'medium', etc.
 
 # # set font
 # font_title = ImageFont.truetype('fonts/Figtree-Black.ttf',size=72)
@@ -108,7 +108,7 @@ def createPoster(url,template_image,poster_output_file,font_color,font_style):
        print("Fetching details from: " + text_link)
 
     # Use 'medium' as default if no style is provided
-    selected_style = template_styles[font_style] if selected_style_name in template_styles else template_styles['medium']
+    selected_style = template_styles[font_style] if font_style in template_styles else template_styles['medium']
 
     # Access fonts and line heights from the selected style
     font_title = selected_style['font_title']
