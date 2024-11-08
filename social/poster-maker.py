@@ -1,4 +1,4 @@
-#!usr/bin/env
+#!/usr/bin/env python3
 import os
 import sys
 import getopt
@@ -27,6 +27,7 @@ import random
 
 border_left = 120
 starting_point = 120
+read_more_line = "...[read more]"
 keywords_source_file = 'keywords.txt'
 light_template_folder = 'light-templates'
 dark_template_folder = 'dark-templates'
@@ -53,6 +54,8 @@ template_styles = {
         'font_link': ImageFont.truetype('fonts/Figtree-Regular.ttf', size=24),
         'title_line_height': 68,
         'description_line_height': 40,
+        'description_line_width': 60,
+        'description_line_count': 8,
         'link_line_height': 30
     },
     'large': {
@@ -61,6 +64,8 @@ template_styles = {
         'font_link': ImageFont.truetype('fonts/Figtree-Regular.ttf', size=32),
         'title_line_height': 100,
         'description_line_height': 70,
+        'description_line_width': 40,
+        'description_line_count': 6,
         'link_line_height': 60
     }
     # Additional styles can be added here
@@ -116,6 +121,8 @@ def createPoster(url,template_image,poster_output_file,font_color,font_style):
     font_link = selected_style['font_link']
     title_line_height = selected_style['title_line_height']
     description_line_height = selected_style['description_line_height']
+    description_line_width = selected_style['description_line_width']
+    description_line_count = selected_style['description_line_count']
     link_line_height = selected_style['link_line_height']
 
     # target_image = '/home/gmadappa/Downloads/poster-output-image.png'
@@ -187,13 +194,19 @@ def createPoster(url,template_image,poster_output_file,font_color,font_style):
         if len(text_meta_description) > 10:
 
             # text_y = text_y + text_title_wrapped_line_height + 50
-            text_meta_description_wrapped = wraptext(text_meta_description, 42)
+            text_meta_description_wrapped = wraptext(text_meta_description, description_line_width)
+            line_count = 0
             for line in text_meta_description_wrapped.splitlines():
+                if line_count >= description_line_count:
+                    I1.text((border_left, text_y), read_more_line, font=font_site, fill=font_color)
+                    break  # Stop processing further lines if the limit is reached
+
                 I1.text((border_left, text_y), line, font=font_site, fill=font_color)
                 text_y += description_line_height  # Move Y position down for the next line
+                line_count += 1  # Increment the line counter
 
             # Add gap
-            text_y += 50
+            text_y += 100
 
         ## add URL text
         I1.text((border_left, text_y), text_link_wrapped, font=font_link, fill=font_color)
