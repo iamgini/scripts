@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import feedparser
 from jinja2 import Template
 import string
@@ -20,7 +22,7 @@ blog_git_location = os.path.expanduser('~') + '/workarea/iamgini/_posts/'
 wp_author_atom_feed = "https://www.techbeatly.com/author/" + my_author_name_short + "/feed/atom/"
 #rss_feed_url = 'https://www.techbeatly.com/feed/atom/?paged=3'
 #rss_feed_url = 'https://www.techbeatly.com/feed/atom/?paged=10'
-# 
+#
 
 article_category_max_count = 3
 entry_update_count = 0
@@ -47,9 +49,9 @@ while len(NewsFeed.entries) > 0:
     if entry.author == my_author_name:
       print(Fore.GREEN + 'Batch ' + str(rss_feed_page_counter) + '::' + 'Updating::' + entry.published[0:10] + Fore.RED + "::" +  entry.title)
       # print(Fore.RED, 'Updating: (Batch:',rss_feed_page_counter,')',entry.published[0:10], entry.title)
-      
+
       entry_update_count = entry_update_count + 1
-      article_title = entry.title.replace('  ',' ') 
+      article_title = entry.title.replace('  ',' ')
       # title_cleaned = article_title.translate(str.maketrans('', '', string.punctuation))
       title_cleaned = html.unescape(entry.title)
       title_cleaned = title_cleaned.replace('“', '-')
@@ -57,12 +59,12 @@ while len(NewsFeed.entries) > 0:
       title_cleaned = title_cleaned.replace("'", '-')
       title_cleaned = "\"" + title_cleaned + "\""
 
-      
+
       # print(entry.title)
       # print(html.unescape(entry.title))
       print(Fore.BLUE + '  Title  : ' + Fore.RESET +  title_cleaned)
 
-      
+
       article_published_date_for_file = entry.published[0:10]
       # Clean the title for file name
       article_new_blog_file = html.unescape(entry.title)
@@ -72,14 +74,14 @@ while len(NewsFeed.entries) > 0:
       print(Fore.BLUE + "  File   : " + Fore.RESET + article_published_date_for_file + '-' + article_new_blog_file + '.md')
 
       article_author = my_author_name_short
-  
+
       category_count = 0
       article_tags = []
       article_categories = []
       try:
         for tag in entry.tags:
           article_tags.append(tag.term.lower())
-          
+
           if tag.term.lower() == 'featured':
             article_featured = 'true'
           if category_count < article_category_max_count:
@@ -89,14 +91,14 @@ while len(NewsFeed.entries) > 0:
       except:
         article_tags = []
       #finally:
-      #  article_categories = article_tags   
+      #  article_categories = article_tags
       article_external_url = entry.link
       article_published_date = entry.published
 
       article_summary_raw = BeautifulSoup(entry.summary, 'html.parser')
       article_summary = article_summary_raw.find('p').get_text()
       # print("Summary: " + article_summary)
-      
+
       ## fetching image
       article_content = BeautifulSoup(entry.content[0].value, 'html.parser')
       #print('\n\n\n\n\n\n', article_content)
@@ -114,13 +116,13 @@ while len(NewsFeed.entries) > 0:
       except:
         article_image = ''
         print(Fore.BLUE + "  Image  : " + Fore.RESET + article_image)
-      
+
       #for image in image_src:
        # print(image)
 
       with open('blog-template.md.j2') as file:
         template = Template(file.read())
-  
+
       templated_output = template.render( article_title = title_cleaned,
                                           article_author = article_author,
                                           article_categories = article_categories,
@@ -131,8 +133,8 @@ while len(NewsFeed.entries) > 0:
                                           article_published_date = article_published_date,
                                           article_featured = article_featured
                                         )
-      # print(templated_output)    
-      
+      # print(templated_output)
+
       new_blog = open(blog_git_location + article_published_date_for_file + '-' + article_new_blog_file + '.md', "w")
       new_blog.write(templated_output)
       new_blog.close()
@@ -143,7 +145,7 @@ while len(NewsFeed.entries) > 0:
   rss_feed_page_counter = rss_feed_page_counter + 1
   # rss_feed_url = 'https://www.techbeatly.com/feed/atom/?paged=' + str(rss_feed_page_counter)
   rss_feed_url = wp_author_atom_feed + '?paged=' + str(rss_feed_page_counter)
- 
+
   NewsFeed = feedparser.parse(rss_feed_url)
   print('Number of RSS posts :', len(NewsFeed.entries))
 
