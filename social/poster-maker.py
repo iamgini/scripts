@@ -100,17 +100,17 @@ def wraptext(input_text,wrap_width):
 def createPoster(url,template_image,poster_output_file,font_color,font_style):
 
     # check if URL already provided, else collect
-    if len(url) < 1:
-        print("Missing url!")
-        text_link = input("Enter the URL: ")
-        if len(text_link) <1:
-            print('Missing url...exiting')
-            sys.exit()
-        else:
-            print("\nFetching details from: " + text_link)
-    else:
-       text_link =  url
-       print("Fetching details from: " + text_link)
+    # if len(url) < 1:
+    #     print("Missing url!")
+    #     text_link = input("Enter the URL: ")
+    #     if len(text_link) <1:
+    #         print('Missing url...exiting')
+    #         sys.exit()
+    #     else:
+    #         print("\nFetching details from: " + text_link)
+    # else:
+    text_link =  url
+    print("Fetching details from: " + text_link)
 
     # Use 'medium' as default if no style is provided
     selected_style = template_styles[font_style] if font_style in template_styles else template_styles['medium']
@@ -259,7 +259,17 @@ def init_poster(argv):
     arg_template = ""
     template_list = ""
     arg_style = ""
-    arg_help = "{0} -u <url> -t <background-template-number> -o <output-file> -s <medium/large> -m <dark or light>".format(argv[0])
+    # arg_help = "{0} -u <url> -t <background-template-number> -o <output-file> -s <medium/large> -m <dark or light>".format(argv[0])
+
+    arg_help = (
+    "{0} -u | --url<url> \n"
+    "\nOptions:\n"
+    "   -t | --template <background-template-number> \n"
+    "   -o | --output   <output-file> \n"
+    "   -s | --style    <medium/large> \n"
+    "   -m | --mode     <dark or light>"
+    "\n"
+).format(argv[0])
 
     try:
         opts, args = getopt.getopt(argv[1:], "hu:t:o:m:s:", ["help", "url=",
@@ -284,6 +294,12 @@ def init_poster(argv):
             elif opt in ("-o", "--output"):
                 arg_output = arg
                 # print('output:', arg_output)
+
+
+        if len(arg_url) < 1:
+            print("Missing url!\n")
+            print(arg_help)
+            sys.exit(2)
 
         if arg_mode == "dark":
             template_file_list = dark_template_image_list
