@@ -1,7 +1,13 @@
 #!/bin/bash
 
-TARGET_DIR="/var/www/html/software"
+# Use current directory or override with argument
+TARGET_DIR="${1:-$(pwd)}"
 OUTPUT_FILE="$TARGET_DIR/index.html"
+
+if [ ! -d "$TARGET_DIR" ]; then
+    echo "❌ Error: Directory $TARGET_DIR does not exist."
+    exit 1
+fi
 
 # HTML Header
 cat <<EOF > "$OUTPUT_FILE"
@@ -26,7 +32,7 @@ cat <<EOF > "$OUTPUT_FILE"
         <tbody>
 EOF
 
-# Loop through files
+# List files
 for file in "$TARGET_DIR"/*; do
     [ -f "$file" ] || continue
     filename=$(basename "$file")
