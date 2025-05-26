@@ -32,10 +32,14 @@ cat <<EOF > "$OUTPUT_FILE"
         <tbody>
 EOF
 
-# List files
+# List files except html
 for file in "$TARGET_DIR"/*; do
     [ -f "$file" ] || continue
     filename=$(basename "$file")
+    # Skip index.html so it doesn't show in the list
+    if [[ "$filename" == "index.html" ]]; then
+        continue
+    fi
     filesize=$(du -h "$file" | cut -f1)
     lastmod=$(date -r "$file" "+%Y-%m-%d %H:%M")
     echo "        <tr>
@@ -44,6 +48,7 @@ for file in "$TARGET_DIR"/*; do
                 <td>$lastmod</td>
             </tr>" >> "$OUTPUT_FILE"
 done
+
 
 # HTML Footer
 cat <<EOF >> "$OUTPUT_FILE"
