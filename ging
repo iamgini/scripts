@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Check for input
+if [ -z "$1" ]; then
+  echo "Usage: $0 <IP_or_Hostname>"
+  exit 1
+fi
+
+TARGET=$1
+
+echo "Pinging $TARGET. Press Ctrl+C to stop."
+
+while true; do
+  TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+  if ping -c1 -W1 "$TARGET" &>/dev/null; then
+    STATUS="UP"
+  else
+    STATUS="DOWN"
+  fi
+  echo "$TIMESTAMP - $TARGET is $STATUS"
+  sleep 1
+done
